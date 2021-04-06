@@ -1,3 +1,3 @@
-# ready_or_not
+# Ready Or Not
 
 A simple bookkeeping application.
