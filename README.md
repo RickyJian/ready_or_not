@@ -1,17 +1,17 @@
 # Ready Or Not
 
-A simple bookkeeping application.
+簡單記帳 APP
 
-## Feature
+## 功能
 
-## Support
+## 支援
 
-* language
-  - [ ] Chinese Traditional
-  - [ ] Chinese Simplified
-  - [ ] English
+* 語言
+  - [ ] 繁體中文
+  - [ ] 簡體中文
+  - [ ] 英文
 
-* Platform
+* 平台
   - [ ] Android
   - [ ] iOS
  
