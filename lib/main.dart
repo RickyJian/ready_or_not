@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready_or_not/bloc/bottom_navigation_bloc.dart';
 import 'package:ready_or_not/ui/Transaction/transaction.dart';
 import 'package:ready_or_not/ui/account/account.dart';
+import 'package:ready_or_not/ui/common/bottom_navigation_item.dart';
 import 'package:ready_or_not/ui/home/home.dart';
 import 'package:ready_or_not/ui/setting/setting.dart';
 
@@ -66,33 +67,49 @@ class AppPage extends StatelessWidget {
           BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
         bloc: _bottomNavigationBloc,
         builder: (BuildContext context, BottomNavigationState state) {
-          return BottomNavigationBar(
-            currentIndex: _bottomNavigationBloc.currentIndex,
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.blue[200],
-            showUnselectedLabels: true,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_balance),
-                label: 'account',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.show_chart),
-                label: 'transaction',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'settings',
-              ),
-            ],
-            onTap: (index) => _bottomNavigationBloc.add(
-              PageTapped(index: index),
+          return BottomAppBar(
+            shape: CircularNotchedRectangle(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BottomNavigationItem(
+                  icon: Icon(Icons.home),
+                  label: Text("home"),
+                  onTapped: () => _bottomNavigationBloc.add(
+                    PageTapped(index: 0),
+                  ),
+                ),
+                BottomNavigationItem(
+                  icon: Icon(Icons.account_balance),
+                  label: Text("account"),
+                  onTapped: () => _bottomNavigationBloc.add(
+                    PageTapped(index: 1),
+                  ),
+                ),
+                BottomNavigationItem(
+                  icon: Icon(Icons.show_chart),
+                  label: Text("transaction"),
+                  onTapped: () => _bottomNavigationBloc.add(
+                    PageTapped(index: 2),
+                  ),
+                ),
+                BottomNavigationItem(
+                  icon: Icon(Icons.settings),
+                  label: Text("setting"),
+                  onTapped: () => _bottomNavigationBloc.add(
+                    PageTapped(index: 3),
+                  ),
+                )
+              ],
             ),
           );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          print("press add");
         },
       ),
     );
