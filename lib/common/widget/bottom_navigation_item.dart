@@ -12,6 +12,7 @@ class BottomNavigationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      onPressed: () => onTapped(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -25,7 +26,6 @@ class BottomNavigationItem extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () => onTapped(),
     );
   }
 }

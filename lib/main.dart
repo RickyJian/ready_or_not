@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ready_or_not/bloc/bottom_navigation_bloc.dart';
-import 'package:ready_or_not/ui/Transaction/transaction.dart';
-import 'package:ready_or_not/ui/account/account.dart';
-import 'package:ready_or_not/ui/common/bottom_navigation_item.dart';
-import 'package:ready_or_not/ui/home/home.dart';
-import 'package:ready_or_not/ui/setting/setting.dart';
+import 'package:ready_or_not/account/ui/account.dart';
+import 'package:ready_or_not/common/bloc/bottom_navigation_bloc.dart';
+import 'package:ready_or_not/common/widget/bottom_navigation_item.dart';
+import 'package:ready_or_not/home/ui/home.dart';
+import 'package:ready_or_not/setting/ui/setting.dart';
+import 'package:ready_or_not/transaction/ui/transaction.dart';
 
 void main() {
   Bloc.observer = AppObserver();
@@ -74,28 +74,28 @@ class AppPage extends StatelessWidget {
               children: [
                 BottomNavigationItem(
                   icon: Icon(Icons.home),
-                  label: Text("home"),
+                  label: Text('home'),
                   onTapped: () => _bottomNavigationBloc.add(
                     PageTapped(index: 0),
                   ),
                 ),
                 BottomNavigationItem(
                   icon: Icon(Icons.account_balance),
-                  label: Text("account"),
+                  label: Text('account'),
                   onTapped: () => _bottomNavigationBloc.add(
                     PageTapped(index: 1),
                   ),
                 ),
                 BottomNavigationItem(
                   icon: Icon(Icons.show_chart),
-                  label: Text("transaction"),
+                  label: Text('transaction'),
                   onTapped: () => _bottomNavigationBloc.add(
                     PageTapped(index: 2),
                   ),
                 ),
                 BottomNavigationItem(
                   icon: Icon(Icons.settings),
-                  label: Text("setting"),
+                  label: Text('setting'),
                   onTapped: () => _bottomNavigationBloc.add(
                     PageTapped(index: 3),
                   ),
@@ -107,10 +107,10 @@ class AppPage extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
         onPressed: () {
-          print("press add");
+          print('press add');
         },
+        child: Icon(Icons.add),
       ),
     );
   }

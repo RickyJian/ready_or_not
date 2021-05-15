@@ -20,12 +20,12 @@ class BottomNavigationBloc
     BottomNavigationEvent event,
   ) async* {
     if (state is AppStarted) {
-      this.add(PageTapped(index: currentIndex));
+      add(PageTapped(index: currentIndex));
     } else if (event is PageTapped) {
-      this.currentIndex = event.index;
+      currentIndex = event.index;
       yield PageLoading();
 
-      switch (this.currentIndex) {
+      switch (currentIndex) {
         case 0:
           {
             yield HomePageLoaded();
