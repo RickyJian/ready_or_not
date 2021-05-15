@@ -27,6 +27,7 @@ dependencies:
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
   equatable: ^2.0.0
+  decimal: ^1.1.0
   pedantic: ^1.11.0
   cupertino_icons: ^1.0.2
 
