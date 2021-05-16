@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sizer: ^1.1.8
+  sizer: ^2.0.13
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
   equatable: ^2.0.0
