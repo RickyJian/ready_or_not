@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready_or_not/account/ui/account.dart';
 import 'package:ready_or_not/common/bloc/bottom_navigation_bloc.dart';
@@ -8,8 +9,12 @@ import 'package:ready_or_not/setting/ui/setting.dart';
 import 'package:ready_or_not/transaction/ui/transaction.dart';
 
 void main() {
-  Bloc.observer = AppObserver();
-  runApp(App());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    Bloc.observer = AppObserver();
+    runApp(App());
+  });
 }
 
 class AppObserver extends BlocObserver {
