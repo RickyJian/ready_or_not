@@ -31,6 +31,7 @@ class App extends StatelessWidget {
       title: 'Ready Or Not',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'openhuninn',
       ),
       home: BlocProvider<BottomNavigationBloc>(
         create: (BuildContext context) => BottomNavigationBloc(),
