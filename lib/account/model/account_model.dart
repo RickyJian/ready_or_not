@@ -12,6 +12,8 @@ class Account extends Equatable {
   final bool enabled;
   final String memo;
 
+  // TODO: add chart
+
   Account(
       {this.name,
       this.type,
