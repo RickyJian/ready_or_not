@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ready_or_not/account/ui/account.dart';
+import 'package:ready_or_not/account/ui/account_list.dart';
 import 'package:ready_or_not/common/bloc/bottom_navigation_bloc.dart';
 import 'package:ready_or_not/common/widget/bottom_navigation_item.dart';
 import 'package:ready_or_not/home/ui/home.dart';
@@ -48,6 +48,7 @@ class AppPage extends StatelessWidget {
         BlocProvider.of<BottomNavigationBloc>(context);
 
     return Scaffold(
+      // TODO: update title when tap bottom item
       appBar: AppBar(
         title: Text('Ready Or Not'),
       ),
@@ -111,6 +112,7 @@ class AppPage extends StatelessWidget {
           );
         },
       ),
+      // TODO: update floating item when tap bottom item
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
