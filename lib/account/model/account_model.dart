@@ -1,27 +1,23 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:ready_or_not/currency/model/currency.dart';
-
-enum AccountType { basic, special }
 
 class Account extends Equatable {
   final String name;
-  final AccountType type;
-  final Decimal initValue;
-  final Currency currency;
+  final Decimal amount;
   final bool enabled;
+  final Currency currency;
   final String memo;
 
   // TODO: add chart
 
-  Account(
-      {this.name,
-      this.type,
-      this.initValue,
-      this.currency,
-      this.enabled,
-      this.memo});
+  const Account({@required this.name, @required this.amount, @required this.currency, this.enabled, this.memo});
+
+  Decimal total() {
+    return amount * currency.exchangeRate;
+  }
 
   @override
-  List<Object> get props => [name, type, initValue, currency, enabled, memo];
+  List<Object> get props => [name, amount, enabled, currency, memo];
 }

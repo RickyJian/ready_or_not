@@ -11,8 +11,7 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: (BuildContext context, Orientation orientation,
-          DeviceType deviceType) {
+      builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
         return NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -91,41 +90,49 @@ class AccountPage extends StatelessWidget {
                       AccountCard(
                         account: Account(
                           name: 'First Account',
-                          type: AccountType.basic,
                           memo: 'First account description',
-                          initValue: Decimal.fromInt(1000),
+                          amount: Decimal.fromInt(1000),
                           enabled: true,
-                          currency: Currency('NTD'),
+                          currency: Currency(
+                            name: 'NTD',
+                            type: CurrencyType.basic,
+                          ),
                         ),
                       ),
                       AccountCard(
                         account: Account(
                           name: 'Second Account',
-                          type: AccountType.basic,
                           memo: 'Second account description',
-                          initValue: Decimal.fromInt(-200),
+                          amount: Decimal.fromInt(-200),
                           enabled: true,
-                          currency: Currency('USD'),
+                          currency: Currency(
+                            name: 'USD',
+                            type: CurrencyType.basic,
+                          ),
                         ),
                       ),
                       AccountCard(
                         account: Account(
                           name: 'Third Account',
-                          type: AccountType.basic,
                           memo: 'Third account description',
-                          initValue: Decimal.fromInt(100),
+                          amount: Decimal.fromInt(100),
                           enabled: true,
-                          currency: Currency('JPN'),
+                          currency: Currency(
+                            name: 'JPN',
+                            type: CurrencyType.basic,
+                          ),
                         ),
                       ),
                       AccountCard(
                         account: Account(
                           name: 'Virtual Account',
-                          type: AccountType.special,
                           memo: 'Virtual account description',
-                          initValue: Decimal.one,
+                          amount: Decimal.one,
                           enabled: true,
-                          currency: Currency('Points'),
+                          currency: Currency(
+                            name: 'Points',
+                            type: CurrencyType.special,
+                          ),
                         ),
                       ),
                     ],

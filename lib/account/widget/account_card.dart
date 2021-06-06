@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:ready_or_not/account/model/account_model.dart';
+import 'package:ready_or_not/currency/model/currency.dart';
 import 'package:sizer/sizer.dart';
 
 class AccountCard extends StatelessWidget {
@@ -12,15 +13,15 @@ class AccountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _color = Colors.green;
-    if (account.initValue.isNegative) {
+    if (account.amount.isNegative) {
       _color = Colors.red;
     }
     var _icon;
-    switch (account.type) {
-      case AccountType.basic:
+    switch (account.currency.type) {
+      case CurrencyType.basic:
         _icon = Icons.monetization_on_outlined;
         break;
-      case AccountType.special:
+      case CurrencyType.special:
         _icon = Icons.cloud_queue_outlined;
         break;
     }
@@ -36,8 +37,7 @@ class AccountCard extends StatelessWidget {
         width: 85.w,
         child: Card(
           elevation: 5,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -123,7 +123,7 @@ class AccountCard extends StatelessWidget {
                                   right: 5.w,
                                 ),
                                 child: Text(
-                                  account.initValue.toDouble().toString(),
+                                  account.amount.toDouble().toString(),
                                   style: TextStyle(
                                     color: _color,
                                     fontSize: 15.sp,
