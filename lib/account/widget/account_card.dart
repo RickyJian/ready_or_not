@@ -17,7 +17,7 @@ class AccountCard extends StatelessWidget {
       _color = Colors.red;
     }
     var _icon;
-    switch (account.currency.type) {
+    switch (account.currencyType) {
       case CurrencyType.basic:
         _icon = Icons.monetization_on_outlined;
         break;
@@ -136,7 +136,7 @@ class AccountCard extends StatelessWidget {
                                   right: 5.w,
                                 ),
                                 child: Text(
-                                  account.currency.name,
+                                  account.currencyName,
                                   style: TextStyle(
                                     color: Colors.black38,
                                     fontSize: 10.sp,

@@ -88,51 +88,43 @@ class AccountPage extends StatelessWidget {
                   delegate: SliverChildListDelegate(
                     [
                       AccountCard(
-                        account: Account(
+                        account: Account.card(
                           name: 'First Account',
                           memo: 'First account description',
                           amount: Decimal.fromInt(1000),
                           enabled: true,
-                          currency: Currency(
-                            name: 'NTD',
-                            type: CurrencyType.basic,
-                          ),
+                          currencyName: 'NTD',
+                          currencyType: CurrencyType.basic,
                         ),
                       ),
                       AccountCard(
-                        account: Account(
+                        account: Account.card(
                           name: 'Second Account',
                           memo: 'Second account description',
                           amount: Decimal.fromInt(-200),
                           enabled: true,
-                          currency: Currency(
-                            name: 'USD',
-                            type: CurrencyType.basic,
-                          ),
+                          currencyName: 'USD',
+                          currencyType: CurrencyType.basic,
                         ),
                       ),
                       AccountCard(
-                        account: Account(
+                        account: Account.card(
                           name: 'Third Account',
                           memo: 'Third account description',
                           amount: Decimal.fromInt(100),
                           enabled: true,
-                          currency: Currency(
-                            name: 'JPN',
-                            type: CurrencyType.basic,
-                          ),
+                          currencyName: 'JPN',
+                          currencyType: CurrencyType.basic,
                         ),
                       ),
                       AccountCard(
-                        account: Account(
+                        account: Account.card(
                           name: 'Virtual Account',
                           memo: 'Virtual account description',
                           amount: Decimal.one,
                           enabled: true,
-                          currency: Currency(
-                            name: 'Points',
-                            type: CurrencyType.special,
-                          ),
+                          currencyName: 'POINTS',
+                          currencyType: CurrencyType.special,
                         ),
                       ),
                     ],

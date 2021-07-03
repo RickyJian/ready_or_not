@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ready_or_not/account/ui/account.dart';
+import 'package:ready_or_not/account/view/account_list.dart';
 import 'package:ready_or_not/common/bloc/bottom_navigation_bloc.dart';
 import 'package:ready_or_not/common/widget/bottom_navigation_item.dart';
 import 'package:ready_or_not/home/ui/home.dart';
@@ -10,8 +10,7 @@ import 'package:ready_or_not/transaction/ui/transaction.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     Bloc.observer = AppObserver();
     runApp(App());
   });
@@ -44,8 +43,7 @@ class App extends StatelessWidget {
 class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _bottomNavigationBloc =
-        BlocProvider.of<BottomNavigationBloc>(context);
+    final _bottomNavigationBloc = BlocProvider.of<BottomNavigationBloc>(context);
 
     return Scaffold(
       // TODO: update title when tap bottom item
@@ -70,8 +68,7 @@ class AppPage extends StatelessWidget {
           return Container();
         },
       ),
-      bottomNavigationBar:
-          BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
+      bottomNavigationBar: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
         bloc: _bottomNavigationBloc,
         builder: (BuildContext context, BottomNavigationState state) {
           return BottomAppBar(
