@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ready_or_not/account/bloc/account_bloc.dart';
 import 'package:ready_or_not/account/view/account_list.dart';
 import 'package:ready_or_not/common/bloc/bottom_navigation_bloc.dart';
 import 'package:ready_or_not/common/widget/bottom_navigation_item.dart';
@@ -10,17 +11,7 @@ import 'package:ready_or_not/transaction/ui/transaction.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
-    Bloc.observer = AppObserver();
-    runApp(App());
-  });
-}
-
-class AppObserver extends BlocObserver {
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-  }
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => runApp(App()));
 }
 
 class App extends StatelessWidget {
@@ -32,8 +23,15 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'openhuninn',
       ),
-      home: BlocProvider<BottomNavigationBloc>(
-        create: (BuildContext context) => BottomNavigationBloc(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (BuildContext context) => BottomNavigationBloc(),
+          ),
+          BlocProvider(
+            create: (BuildContext context) => AccountBloc(),
+          ),
+        ],
         child: AppPage(),
       ),
     );

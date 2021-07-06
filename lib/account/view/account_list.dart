@@ -1,13 +1,32 @@
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:ready_or_not/account/model/account_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ready_or_not/account/bloc/account_bloc.dart';
 import 'package:ready_or_not/account/widget/account_card.dart';
 import 'package:ready_or_not/account/widget/account_info.dart';
-import 'package:ready_or_not/currency/model/currency.dart';
 import 'package:sizer/sizer.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
+  @override
+  _AccountPage createState() => _AccountPage();
+}
+
+class _AccountPage extends State<AccountPage> {
+  AccountBloc _accountBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _accountBloc = context.read<AccountBloc>();
+    _accountBloc.add(ListAccount());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Sizer(
@@ -84,51 +103,23 @@ class AccountPage extends StatelessWidget {
                   ],
                   backgroundColor: Colors.white,
                 ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      AccountCard(
-                        account: Account.card(
-                          name: 'First Account',
-                          memo: 'First account description',
-                          amount: Decimal.fromInt(1000),
-                          enabled: true,
-                          currencyName: 'NTD',
-                          currencyType: CurrencyType.basic,
+                BlocBuilder<AccountBloc, AccountState>(
+                  bloc: _accountBloc,
+                  builder: (context, state) {
+                    if (state is AccountLoading) {
+                      return SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) => AccountCard(
+                            account: state.accounts[index],
+                          ),
+                          childCount: state.accounts.length,
                         ),
-                      ),
-                      AccountCard(
-                        account: Account.card(
-                          name: 'Second Account',
-                          memo: 'Second account description',
-                          amount: Decimal.fromInt(-200),
-                          enabled: true,
-                          currencyName: 'USD',
-                          currencyType: CurrencyType.basic,
-                        ),
-                      ),
-                      AccountCard(
-                        account: Account.card(
-                          name: 'Third Account',
-                          memo: 'Third account description',
-                          amount: Decimal.fromInt(100),
-                          enabled: true,
-                          currencyName: 'JPN',
-                          currencyType: CurrencyType.basic,
-                        ),
-                      ),
-                      AccountCard(
-                        account: Account.card(
-                          name: 'Virtual Account',
-                          memo: 'Virtual account description',
-                          amount: Decimal.one,
-                          enabled: true,
-                          currencyName: 'POINTS',
-                          currencyType: CurrencyType.special,
-                        ),
-                      ),
-                    ],
-                  ),
+                      );
+                    } else if (state is AccountFailed) {
+                      return const Center(child: Text('failed to fetch posts'));
+                    }
+                    return SliverList(delegate: SliverChildListDelegate([]));
+                  },
                 )
               ],
             ),
