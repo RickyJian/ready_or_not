@@ -2,32 +2,73 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:ready_or_not/account/widget/const.dart' as constant;
 import 'package:sizer/sizer.dart';
 
-enum accountInfoType { assets, liabilities, netAssets }
+class AccountInfo extends StatelessWidget {
+  final Decimal assetsAmount;
+  final Decimal liabilityAmount;
+  final Decimal netAssetsAmount;
+
+  AccountInfo({this.assetsAmount, this.liabilityAmount, this.netAssetsAmount});
+
+  AccountInfo.init()
+      : assetsAmount = Decimal.zero,
+        liabilityAmount = Decimal.zero,
+        netAssetsAmount = Decimal.zero;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        AccountInfoItem(
+          name: constant.assets,
+          value: assetsAmount,
+          type: constant.accountInfoType.assets,
+        ),
+        _partition(),
+        AccountInfoItem(
+          name: constant.liability,
+          value: liabilityAmount,
+          type: constant.accountInfoType.liabilities,
+        ),
+        _partition(),
+        AccountInfoItem(
+          name: constant.netAssets,
+          value: netAssetsAmount,
+          type: constant.accountInfoType.netAssets,
+        ),
+      ],
+    );
+  }
+
+  Widget _partition() {
+    return Container(
+      width: 1,
+      height: 10.h,
+      color: Colors.grey.withOpacity(0.8),
+    );
+  }
+}
 
 class AccountInfoItem extends StatelessWidget {
   final String name;
   final Decimal value;
-  final accountInfoType type;
+  final constant.accountInfoType type;
 
-  AccountInfoItem({
-    @required this.name,
-    @required this.value,
-    @required this.type,
-  });
+  AccountInfoItem({@required this.name, @required this.value, @required this.type});
 
   @override
   Widget build(BuildContext context) {
     var _color;
     switch (type) {
-      case accountInfoType.assets:
+      case constant.accountInfoType.assets:
         _color = Colors.green;
         break;
-      case accountInfoType.liabilities:
+      case constant.accountInfoType.liabilities:
         _color = Colors.red;
         break;
-      case accountInfoType.netAssets:
+      case constant.accountInfoType.netAssets:
         if (!value.isNegative) {
           _color = Colors.green;
         } else {
@@ -54,7 +95,7 @@ class AccountInfoItem extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.only(top: 1.5.h, bottom: 1.5),
               child: Text(
-                '$value',
+                value.toDouble().toString(),
                 style: TextStyle(
                   color: _color,
                   fontSize: 17.sp,
@@ -64,17 +105,6 @@ class AccountInfoItem extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class AccountInfoPartition extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 1,
-      height: 10.h,
-      color: Colors.grey.withOpacity(0.8),
     );
   }
 }

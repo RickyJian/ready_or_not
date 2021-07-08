@@ -2,8 +2,45 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:ready_or_not/account/model/account_model.dart';
+import 'package:ready_or_not/account/widget/const.dart' as constant;
 import 'package:ready_or_not/currency/model/currency.dart';
 import 'package:sizer/sizer.dart';
+
+class AccountCardHeader extends StatelessWidget {
+  final int total;
+
+  // TODO: add filter
+
+  AccountCardHeader({this.total});
+
+  AccountCardHeader.init() : total = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      title: Text(
+        '${constant.total}: $total',
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 15.sp,
+        ),
+      ),
+      elevation: 0,
+      pinned: true,
+      actions: [
+        TextButton(
+          // TODO: open filter
+          onPressed: () {},
+          child: Icon(
+            Icons.sort,
+            size: 20.sp,
+          ),
+        ),
+      ],
+      backgroundColor: Colors.white,
+    );
+  }
+}
 
 class AccountCard extends StatelessWidget {
   final Account account;
