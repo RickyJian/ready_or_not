@@ -5,23 +5,29 @@ abstract class AccountState extends Equatable {
 }
 
 class AccountLoading extends AccountState {
-  final List<Account> accounts;
-  final String pageToken;
-  final bool hasNextPageToken;
-  final int limit;
-
-  const AccountLoading({this.accounts, this.pageToken, this.hasNextPageToken, this.limit});
+  const AccountLoading();
 
   @override
-  List<Object> get props => [accounts, hasNextPageToken];
+  List<Object> get props => [];
 
   @override
   String toString() => 'account loading state';
 }
 
 class AccountSuccess extends AccountState {
+  final AccountInfo info;
+
+  final int total;
+
+  final List<Account> accounts;
+  final String pageToken;
+  final bool hasNextPageToken;
+  final int limit;
+
+  const AccountSuccess({this.info, this.accounts, this.pageToken, this.hasNextPageToken, this.limit, this.total});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [info, accounts, pageToken, hasNextPageToken, limit, total];
 
   @override
   String toString() => 'account success state';

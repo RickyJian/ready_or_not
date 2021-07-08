@@ -35,3 +35,14 @@ class Account extends Equatable {
   @override
   List<Object> get props => [name, amount, enabled, createTime, memo, currencyName, currencyType];
 }
+
+class AccountInfo extends Equatable {
+  final Decimal assets;
+  final Decimal liability;
+  final Decimal netAssets;
+
+  const AccountInfo({this.assets, this.liability, this.netAssets});
+
+  @override
+  List<Object> get props => [assets, liability, netAssets];
+}

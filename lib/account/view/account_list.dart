@@ -1,10 +1,8 @@
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready_or_not/account/bloc/account_bloc.dart';
-import 'package:ready_or_not/account/widget/account_card.dart';
-import 'package:ready_or_not/account/widget/account_info.dart';
+import 'package:ready_or_not/account/widget/widget.dart';
 import 'package:sizer/sizer.dart';
 
 class AccountPage extends StatefulWidget {
@@ -24,6 +22,7 @@ class _AccountPage extends State<AccountPage> {
 
   @override
   void dispose() {
+    _accountBloc.close();
     super.dispose();
   }
 
@@ -40,26 +39,19 @@ class _AccountPage extends State<AccountPage> {
                     Container(
                       color: Color(0xFFF6F6F6),
                       height: 15.h,
-                      child: Row(
-                        children: [
-                          AccountInfoItem(
-                            name: 'Assets',
-                            value: Decimal.parse('10000.01'),
-                            type: accountInfoType.assets,
-                          ),
-                          AccountInfoPartition(),
-                          AccountInfoItem(
-                            name: 'Liability',
-                            value: Decimal.parse('100.01'),
-                            type: accountInfoType.liabilities,
-                          ),
-                          AccountInfoPartition(),
-                          AccountInfoItem(
-                            name: 'Net Assets',
-                            value: Decimal.parse('100.01'),
-                            type: accountInfoType.netAssets,
-                          ),
-                        ],
+                      child: BlocBuilder<AccountBloc, AccountState>(
+                        builder: (context, state) {
+                          if (state is AccountSuccess) {
+                            return AccountInfo(
+                              assetsAmount: state.info.assets,
+                              liabilityAmount: state.info.liability,
+                              netAssetsAmount: state.info.netAssets,
+                            );
+                          } else if (state is AccountFailed) {
+                            // TODO: error message
+                          }
+                          return AccountInfo.init();
+                        },
                       ),
                     ),
                   ],
@@ -82,31 +74,19 @@ class _AccountPage extends State<AccountPage> {
             ),
             child: CustomScrollView(
               slivers: [
-                SliverAppBar(
-                  title: Text(
-                    'Total: 10',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 15.sp,
-                    ),
-                  ),
-                  elevation: 0,
-                  pinned: true,
-                  actions: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.sort,
-                        size: 20.sp,
-                      ),
-                    ),
-                  ],
-                  backgroundColor: Colors.white,
+                BlocBuilder<AccountBloc, AccountState>(
+                  builder: (context, state) {
+                    if (state is AccountSuccess) {
+                      return AccountCardHeader(total: state.total);
+                    } else if (state is AccountFailed) {
+                      // TODO: error message
+                    }
+                    return AccountCardHeader.init();
+                  },
                 ),
                 BlocBuilder<AccountBloc, AccountState>(
-                  bloc: _accountBloc,
                   builder: (context, state) {
-                    if (state is AccountLoading) {
+                    if (state is AccountSuccess) {
                       return SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) => AccountCard(
@@ -116,7 +96,7 @@ class _AccountPage extends State<AccountPage> {
                         ),
                       );
                     } else if (state is AccountFailed) {
-                      return const Center(child: Text('failed to fetch posts'));
+                      // TODO: error message
                     }
                     return SliverList(delegate: SliverChildListDelegate([]));
                   },
