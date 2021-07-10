@@ -6,8 +6,7 @@ class BottomNavigationItem extends StatelessWidget {
   final Text label;
   final VoidCallback onTapped;
 
-  BottomNavigationItem(
-      {@required this.icon, @required this.label, @required this.onTapped});
+  BottomNavigationItem({@required this.icon, @required this.label, @required this.onTapped});
 
   @override
   Widget build(BuildContext context) {

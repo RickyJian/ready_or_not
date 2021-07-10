@@ -7,16 +7,11 @@ abstract class BottomNavigationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AppStarted extends BottomNavigationEvent {
-  @override
-  String toString() => 'AppStarted';
-}
+class BottomNavigationItemTapped extends BottomNavigationEvent {
+  final BottomNavigationItemIndex index;
 
-class PageTapped extends BottomNavigationEvent {
-  final int index;
-
-  PageTapped({@required this.index}) : super();
+  const BottomNavigationItemTapped({@required this.index});
 
   @override
-  String toString() => 'PageTapped: $index';
+  String toString() => 'Bottom navigation item tapped: $index';
 }

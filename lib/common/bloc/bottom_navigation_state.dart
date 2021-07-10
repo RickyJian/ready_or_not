@@ -9,25 +9,39 @@ abstract class BottomNavigationState extends Equatable {
 
 class PageLoading extends BottomNavigationState {
   @override
-  String toString() => 'Page loading...';
+  String toString() => 'Page loading';
 }
 
-class HomePageLoaded extends BottomNavigationState {
+class BottomNavigationItemNotFound extends BottomNavigationState {
+  final BottomNavigationItemIndex index;
+
+  const BottomNavigationItemNotFound({@required this.index});
+
   @override
-  String toString() => 'Home page loaded';
+  String toString() => 'Bottom navigation item not found: item index is $index';
 }
 
-class AccountingPageLoaded extends BottomNavigationState {
+class BottomNavigationLoading extends BottomNavigationState {
   @override
-  String toString() => 'Account page loaded';
+  String toString() => 'Bottom navigation loading';
 }
 
-class TransactionPageLoaded extends BottomNavigationState {
+class HomePageLoading extends BottomNavigationState {
   @override
-  String toString() => 'Transaction page loaded';
+  String toString() => 'Home page loading';
 }
 
-class SettingPageLoaded extends BottomNavigationState {
+class AccountPageLoading extends BottomNavigationState {
   @override
-  String toString() => 'Setting page loaded';
+  String toString() => 'Account page loading';
+}
+
+class TransactionPageLoading extends BottomNavigationState {
+  @override
+  String toString() => 'Transaction page loading';
+}
+
+class SettingPageLoading extends BottomNavigationState {
+  @override
+  String toString() => 'Setting page loading';
 }

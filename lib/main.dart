@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready_or_not/account/bloc/account_bloc.dart';
 import 'package:ready_or_not/account/view/account_list.dart';
-import 'package:ready_or_not/common/bloc/bottom_navigation_bloc.dart';
-import 'package:ready_or_not/common/widget/bottom_navigation_item.dart';
+import 'package:ready_or_not/common/common.dart';
 import 'package:ready_or_not/home/ui/home.dart';
 import 'package:ready_or_not/setting/ui/setting.dart';
 import 'package:ready_or_not/transaction/ui/transaction.dart';
@@ -26,10 +25,11 @@ class App extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (BuildContext context) => BottomNavigationBloc(),
+            create: (_) =>
+                BottomNavigationBloc()..add(BottomNavigationItemTapped(index: BottomNavigationItemIndex.home)),
           ),
           BlocProvider(
-            create: (BuildContext context) => AccountBloc(),
+            create: (_) => AccountBloc(),
           ),
         ],
         child: AppPage(),
@@ -49,17 +49,16 @@ class AppPage extends StatelessWidget {
         title: Text('Ready Or Not'),
       ),
       body: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
-        bloc: _bottomNavigationBloc,
-        builder: (BuildContext context, BottomNavigationState state) {
+        builder: (context, state) {
           if (state is PageLoading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is HomePageLoaded) {
+          } else if (state is HomePageLoading) {
             return HomePage();
-          } else if (state is AccountingPageLoaded) {
+          } else if (state is AccountPageLoading) {
             return AccountPage();
-          } else if (state is TransactionPageLoaded) {
+          } else if (state is TransactionPageLoading) {
             return TransactionPage();
-          } else if (state is SettingPageLoaded) {
+          } else if (state is SettingPageLoading) {
             return SettingPage();
           }
           // TODO; return no page
@@ -67,8 +66,7 @@ class AppPage extends StatelessWidget {
         },
       ),
       bottomNavigationBar: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
-        bloc: _bottomNavigationBloc,
-        builder: (BuildContext context, BottomNavigationState state) {
+        builder: (context, state) {
           return BottomAppBar(
             shape: CircularNotchedRectangle(),
             child: Row(
@@ -78,28 +76,28 @@ class AppPage extends StatelessWidget {
                   icon: Icon(Icons.home),
                   label: Text('home'),
                   onTapped: () => _bottomNavigationBloc.add(
-                    PageTapped(index: 0),
+                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.home),
                   ),
                 ),
                 BottomNavigationItem(
                   icon: Icon(Icons.account_balance),
                   label: Text('account'),
                   onTapped: () => _bottomNavigationBloc.add(
-                    PageTapped(index: 1),
+                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.account),
                   ),
                 ),
                 BottomNavigationItem(
                   icon: Icon(Icons.show_chart),
                   label: Text('transaction'),
                   onTapped: () => _bottomNavigationBloc.add(
-                    PageTapped(index: 2),
+                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.transaction),
                   ),
                 ),
                 BottomNavigationItem(
                   icon: Icon(Icons.settings),
                   label: Text('setting'),
                   onTapped: () => _bottomNavigationBloc.add(
-                    PageTapped(index: 3),
+                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.setting),
                   ),
                 )
               ],

@@ -4,50 +4,45 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ready_or_not/common/bloc/const.dart';
 
 part 'bottom_navigation_event.dart';
 
 part 'bottom_navigation_state.dart';
 
-class BottomNavigationBloc
-    extends Bloc<BottomNavigationEvent, BottomNavigationState> {
-  int currentIndex = 0;
-
+class BottomNavigationBloc extends Bloc<BottomNavigationEvent, BottomNavigationState> {
   BottomNavigationBloc() : super(PageLoading());
 
   @override
   Stream<BottomNavigationState> mapEventToState(
     BottomNavigationEvent event,
   ) async* {
-    if (state is AppStarted) {
-      add(PageTapped(index: currentIndex));
-    } else if (event is PageTapped) {
-      currentIndex = event.index;
-      yield PageLoading();
+    yield PageLoading();
 
-      switch (currentIndex) {
-        case 0:
+    if (event is BottomNavigationItemTapped) {
+      switch (event.index) {
+        case BottomNavigationItemIndex.home:
           {
-            yield HomePageLoaded();
+            yield HomePageLoading();
           }
           break;
-        case 1:
+        case BottomNavigationItemIndex.account:
           {
-            yield AccountingPageLoaded();
+            yield AccountPageLoading();
           }
           break;
-        case 2:
+        case BottomNavigationItemIndex.transaction:
           {
-            yield TransactionPageLoaded();
+            yield TransactionPageLoading();
           }
           break;
-        case 3:
+        case BottomNavigationItemIndex.setting:
           {
-            yield SettingPageLoaded();
+            yield SettingPageLoading();
           }
           break;
         default:
-          // TODO: add error page
+          yield BottomNavigationItemNotFound(index: event.index);
           break;
       }
     }
