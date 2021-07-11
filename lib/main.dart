@@ -25,8 +25,7 @@ class App extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) =>
-                BottomNavigationBloc()..add(BottomNavigationItemTapped(index: BottomNavigationItemIndex.home)),
+            create: (_) => BottomNavigationBloc(),
           ),
           BlocProvider(
             create: (_) => AccountBloc(),
@@ -38,11 +37,29 @@ class App extends StatelessWidget {
   }
 }
 
-class AppPage extends StatelessWidget {
+class AppPage extends StatefulWidget {
+  @override
+  _AppPageState createState() => _AppPageState();
+}
+
+class _AppPageState extends State<AppPage> {
+  BottomNavigationBloc _bottomNavigationBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bottomNavigationBloc = context.read<BottomNavigationBloc>();
+    _bottomNavigationBloc.add(BottomNavigationItemTapped(index: BottomNavigationItemIndex.home));
+  }
+
+  @override
+  void dispose() {
+    _bottomNavigationBloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _bottomNavigationBloc = BlocProvider.of<BottomNavigationBloc>(context);
-
     return Scaffold(
       // TODO: update title when tap bottom item
       appBar: AppBar(
@@ -73,29 +90,33 @@ class AppPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 BottomNavigationItem(
-                  icon: Icon(Icons.home),
-                  label: Text('home'),
+                  icon: Icons.home,
+                  itemName: 'home',
+                  isSelected: state.currentIndex == BottomNavigationItemIndex.home,
                   onTapped: () => _bottomNavigationBloc.add(
                     BottomNavigationItemTapped(index: BottomNavigationItemIndex.home),
                   ),
                 ),
                 BottomNavigationItem(
-                  icon: Icon(Icons.account_balance),
-                  label: Text('account'),
+                  icon: Icons.account_balance,
+                  itemName: 'account',
+                  isSelected: state.currentIndex == BottomNavigationItemIndex.account,
                   onTapped: () => _bottomNavigationBloc.add(
                     BottomNavigationItemTapped(index: BottomNavigationItemIndex.account),
                   ),
                 ),
                 BottomNavigationItem(
-                  icon: Icon(Icons.show_chart),
-                  label: Text('transaction'),
+                  icon: Icons.show_chart,
+                  itemName: 'transaction',
+                  isSelected: state.currentIndex == BottomNavigationItemIndex.transaction,
                   onTapped: () => _bottomNavigationBloc.add(
                     BottomNavigationItemTapped(index: BottomNavigationItemIndex.transaction),
                   ),
                 ),
                 BottomNavigationItem(
-                  icon: Icon(Icons.settings),
-                  label: Text('setting'),
+                  icon: Icons.settings,
+                  itemName: 'setting',
+                  isSelected: state.currentIndex == BottomNavigationItemIndex.setting,
                   onTapped: () => _bottomNavigationBloc.add(
                     BottomNavigationItemTapped(index: BottomNavigationItemIndex.setting),
                   ),
