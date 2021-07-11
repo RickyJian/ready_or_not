@@ -1,3 +1,3 @@
-// TODO Implement this library.// Below defines bottom navigation enum and const
+// Below defines bottom navigation enum and const
 
-enum BottomNavigationItemIndex { home, account, transaction, setting }
+enum BottomNavigationItemIndex { unspecified, home, account, transaction, setting }
