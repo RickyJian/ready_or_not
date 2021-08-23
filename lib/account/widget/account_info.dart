@@ -10,7 +10,7 @@ class AccountInfo extends StatelessWidget {
   final Decimal liabilityAmount;
   final Decimal netAssetsAmount;
 
-  AccountInfo({this.assetsAmount, this.liabilityAmount, this.netAssetsAmount});
+  AccountInfo({required this.assetsAmount, required this.liabilityAmount, required this.netAssetsAmount});
 
   AccountInfo.init()
       : assetsAmount = Decimal.zero,
@@ -56,11 +56,11 @@ class AccountInfoItem extends StatelessWidget {
   final Decimal value;
   final constant.accountInfoType type;
 
-  AccountInfoItem({@required this.name, @required this.value, @required this.type});
+  AccountInfoItem({required this.name, required this.value, required this.type});
 
   @override
   Widget build(BuildContext context) {
-    var _color;
+    Color _color;
     switch (type) {
       case constant.accountInfoType.assets:
         _color = Colors.green;

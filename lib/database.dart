@@ -5,7 +5,7 @@ class DatabaseProvider {
   static const _version = 1;
   static const _schema = 'ready_or_not.db';
   static final DatabaseProvider db = DatabaseProvider._();
-  Database _database;
+  late Database? _database;
 
   DatabaseProvider._();
 
@@ -31,7 +31,7 @@ class DatabaseProvider {
   ) [WITHOUT ROWID];
   ''';
 
-  Future<Database> get open async {
+  Future<Database?> get open async {
     if (_database != null) {
       return _database;
     }

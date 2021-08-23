@@ -8,7 +8,7 @@ class BottomNavigationItem extends StatelessWidget {
   final VoidCallback onTapped;
 
   const BottomNavigationItem(
-      {@required this.icon, @required this.itemName, @required this.isSelected, @required this.onTapped});
+      {required this.icon, required this.itemName, required this.isSelected, required this.onTapped});
 
   @override
   Widget build(BuildContext context) {

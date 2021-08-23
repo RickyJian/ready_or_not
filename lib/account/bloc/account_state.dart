@@ -24,7 +24,13 @@ class AccountSuccess extends AccountState {
   final bool hasNextPageToken;
   final int limit;
 
-  const AccountSuccess({this.info, this.accounts, this.pageToken, this.hasNextPageToken, this.limit, this.total});
+  AccountSuccess(
+      {required this.info,
+      required this.accounts,
+      this.pageToken = '',
+      this.hasNextPageToken = false,
+      this.limit = 10,
+      this.total = 0});
 
   @override
   List<Object> get props => [info, accounts, pageToken, hasNextPageToken, limit, total];
@@ -36,7 +42,7 @@ class AccountSuccess extends AccountState {
 class AccountFailed extends AccountState {
   final Error error;
 
-  const AccountFailed({this.error});
+  AccountFailed({required this.error});
 
   @override
   List<Object> get props => [];

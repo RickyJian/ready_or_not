@@ -11,7 +11,7 @@ class AccountCardHeader extends StatelessWidget {
 
   // TODO: add filter
 
-  AccountCardHeader({this.total});
+  AccountCardHeader({required this.total});
 
   AccountCardHeader.init() : total = 0;
 
@@ -45,7 +45,7 @@ class AccountCardHeader extends StatelessWidget {
 class AccountCard extends StatelessWidget {
   final Account account;
 
-  AccountCard({@required this.account});
+  AccountCard({required this.account});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class AccountCard extends StatelessWidget {
     if (account.amount.isNegative) {
       _color = Colors.red;
     }
-    var _icon;
+    IconData _icon;
     switch (account.currencyType) {
       case CurrencyType.basic:
         _icon = Icons.monetization_on_outlined;

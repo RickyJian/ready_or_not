@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class TransactionPage extends StatelessWidget {
-  final String text;
-
-  TransactionPage({this.text}) : super();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

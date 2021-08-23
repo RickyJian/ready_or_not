@@ -17,7 +17,7 @@ class PageLoading extends BottomNavigationState {
 class BottomNavigationItemNotFound extends BottomNavigationState {
   final BottomNavigationItemIndex index;
 
-  BottomNavigationItemNotFound({@required this.index});
+  BottomNavigationItemNotFound({required this.index});
 
   @override
   String toString() => 'Bottom navigation item not found: item index is $index';

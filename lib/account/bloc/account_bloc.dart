@@ -75,9 +75,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         liability: Decimal.fromInt(100),
         netAssets: Decimal.fromInt(900),
       );
-      yield AccountSuccess(accounts: accounts, hasNextPageToken: false, info: info, total: 5);
+      yield AccountSuccess(accounts: accounts, hasNextPageToken: false, info: info, total: 5, limit: 10);
     } catch (error) {
-      yield AccountFailed(error: error);
+      // TODO: redirect error page
     }
   }
 }

@@ -43,7 +43,7 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
-  BottomNavigationBloc _bottomNavigationBloc;
+  late BottomNavigationBloc _bottomNavigationBloc;
 
   @override
   void initState() {

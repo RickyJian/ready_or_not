@@ -10,7 +10,7 @@ abstract class BottomNavigationEvent extends Equatable {
 class BottomNavigationItemTapped extends BottomNavigationEvent {
   final BottomNavigationItemIndex index;
 
-  const BottomNavigationItemTapped({@required this.index});
+  const BottomNavigationItemTapped({required this.index});
 
   @override
   String toString() => 'Bottom navigation item tapped: $index';

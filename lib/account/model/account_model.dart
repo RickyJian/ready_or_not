@@ -1,6 +1,5 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:ready_or_not/currency/model/currency.dart';
 
 class Account extends Equatable {
@@ -15,13 +14,13 @@ class Account extends Equatable {
   // TODO: add chart
 
   Account.card(
-      {@required this.name,
-      @required this.amount,
-      @required this.currencyName,
-      @required this.currencyType,
-      this.enabled,
-      this.createTime,
-      this.memo});
+      {required this.name,
+      required this.amount,
+      required this.currencyName,
+      required this.currencyType,
+      this.enabled = false,
+      this.createTime = 0,
+      this.memo = ''});
 
   Account.fromMap(Map<String, dynamic> objectMap)
       : name = objectMap['name'],
@@ -41,7 +40,7 @@ class AccountInfo extends Equatable {
   final Decimal liability;
   final Decimal netAssets;
 
-  const AccountInfo({this.assets, this.liability, this.netAssets});
+  const AccountInfo({required this.assets, required this.liability, required this.netAssets});
 
   @override
   List<Object> get props => [assets, liability, netAssets];

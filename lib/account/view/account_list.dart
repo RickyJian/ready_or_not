@@ -11,7 +11,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPage extends State<AccountPage> {
-  AccountBloc _accountBloc;
+  late AccountBloc _accountBloc;
 
   @override
   void initState() {
