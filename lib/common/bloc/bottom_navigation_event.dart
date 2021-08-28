@@ -8,7 +8,7 @@ abstract class BottomNavigationEvent extends Equatable {
 }
 
 class BottomNavigationItemTapped extends BottomNavigationEvent {
-  final BottomNavigationItemIndex index;
+  final BottomNavItem index;
 
   const BottomNavigationItemTapped({required this.index});
 

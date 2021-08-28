@@ -3,10 +3,10 @@ part of 'bottom_navigation_bloc.dart';
 abstract class BottomNavigationState extends Equatable {
   const BottomNavigationState();
 
-  BottomNavigationItemIndex get currentIndex => BottomNavigationItemIndex.unspecified;
+  get index => BottomNavItem.unspecified;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [index];
 }
 
 class PageLoading extends BottomNavigationState {
@@ -15,7 +15,8 @@ class PageLoading extends BottomNavigationState {
 }
 
 class BottomNavigationItemNotFound extends BottomNavigationState {
-  final BottomNavigationItemIndex index;
+  @override
+  final BottomNavItem index;
 
   BottomNavigationItemNotFound({required this.index});
 
@@ -23,14 +24,9 @@ class BottomNavigationItemNotFound extends BottomNavigationState {
   String toString() => 'Bottom navigation item not found: item index is $index';
 }
 
-class BottomNavigationLoading extends BottomNavigationState {
-  @override
-  String toString() => 'Bottom navigation loading';
-}
-
 class HomePageLoading extends BottomNavigationState {
   @override
-  BottomNavigationItemIndex get currentIndex => BottomNavigationItemIndex.home;
+  get index => BottomNavItem.home;
 
   @override
   String toString() => 'Home page loading';
@@ -38,7 +34,7 @@ class HomePageLoading extends BottomNavigationState {
 
 class AccountPageLoading extends BottomNavigationState {
   @override
-  BottomNavigationItemIndex get currentIndex => BottomNavigationItemIndex.account;
+  get index => BottomNavItem.account;
 
   @override
   String toString() => 'Account page loading';
@@ -46,7 +42,7 @@ class AccountPageLoading extends BottomNavigationState {
 
 class TransactionPageLoading extends BottomNavigationState {
   @override
-  BottomNavigationItemIndex get currentIndex => BottomNavigationItemIndex.transaction;
+  get index => BottomNavItem.transaction;
 
   @override
   String toString() => 'Transaction page loading';
@@ -54,7 +50,7 @@ class TransactionPageLoading extends BottomNavigationState {
 
 class SettingPageLoading extends BottomNavigationState {
   @override
-  BottomNavigationItemIndex get currentIndex => BottomNavigationItemIndex.setting;
+  get index => BottomNavItem.setting;
 
   @override
   String toString() => 'Setting page loading';

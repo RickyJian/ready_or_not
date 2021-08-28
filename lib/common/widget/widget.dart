@@ -1,1 +1,2 @@
-export 'bottom_navigation_item.dart';
+export 'bottom_navigation.dart';
+export 'const.dart';

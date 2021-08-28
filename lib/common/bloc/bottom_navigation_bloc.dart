@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ready_or_not/common/bloc/const.dart';
+import 'package:ready_or_not/common/common.dart';
 
 part 'bottom_navigation_event.dart';
 
@@ -19,22 +19,22 @@ class BottomNavigationBloc extends Bloc<BottomNavigationEvent, BottomNavigationS
 
     if (event is BottomNavigationItemTapped) {
       switch (event.index) {
-        case BottomNavigationItemIndex.home:
+        case BottomNavItem.home:
           {
             yield HomePageLoading();
           }
           break;
-        case BottomNavigationItemIndex.account:
+        case BottomNavItem.account:
           {
             yield AccountPageLoading();
           }
           break;
-        case BottomNavigationItemIndex.transaction:
+        case BottomNavItem.transaction:
           {
             yield TransactionPageLoading();
           }
           break;
-        case BottomNavigationItemIndex.setting:
+        case BottomNavItem.setting:
           {
             yield SettingPageLoading();
           }

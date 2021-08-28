@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready_or_not/account/bloc/account_bloc.dart';
 import 'package:ready_or_not/account/view/account_list.dart';
-import 'package:ready_or_not/common/common.dart';
+import 'package:ready_or_not/common/common.dart' as common;
 import 'package:ready_or_not/home/ui/home.dart';
 import 'package:ready_or_not/setting/ui/setting.dart';
 import 'package:ready_or_not/transaction/ui/transaction.dart';
@@ -25,7 +25,7 @@ class App extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => BottomNavigationBloc(),
+            create: (_) => common.BottomNavigationBloc(),
           ),
           BlocProvider(
             create: (_) => AccountBloc(),
@@ -43,13 +43,13 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
-  late BottomNavigationBloc _bottomNavigationBloc;
+  late common.BottomNavigationBloc _bottomNavigationBloc;
 
   @override
   void initState() {
     super.initState();
-    _bottomNavigationBloc = context.read<BottomNavigationBloc>();
-    _bottomNavigationBloc.add(BottomNavigationItemTapped(index: BottomNavigationItemIndex.home));
+    _bottomNavigationBloc = context.read<common.BottomNavigationBloc>();
+    _bottomNavigationBloc.add(common.BottomNavigationItemTapped(index: common.BottomNavItem.home));
   }
 
   @override
@@ -65,63 +65,50 @@ class _AppPageState extends State<AppPage> {
       appBar: AppBar(
         title: Text('Ready Or Not'),
       ),
-      body: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
+      body: BlocBuilder<common.BottomNavigationBloc, common.BottomNavigationState>(
         builder: (context, state) {
-          if (state is PageLoading) {
+          if (state is common.PageLoading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is HomePageLoading) {
+          } else if (state is common.HomePageLoading) {
             return HomePage();
-          } else if (state is AccountPageLoading) {
+          } else if (state is common.AccountPageLoading) {
             return AccountPage();
-          } else if (state is TransactionPageLoading) {
+          } else if (state is common.TransactionPageLoading) {
             return TransactionPage();
-          } else if (state is SettingPageLoading) {
+          } else if (state is common.SettingPageLoading) {
             return SettingPage();
           }
           // TODO; return no page
           return Container();
         },
       ),
-      bottomNavigationBar: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
+      bottomNavigationBar: BlocBuilder<common.BottomNavigationBloc, common.BottomNavigationState>(
         builder: (context, state) {
           return BottomAppBar(
             shape: CircularNotchedRectangle(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BottomNavigationItem(
+            child: common.BottomNavigationBar(
+              currentIndex: state.index,
+              items: [
+                common.BottomNavigationItem(
                   icon: Icons.home,
-                  itemName: 'home',
-                  isSelected: state.currentIndex == BottomNavigationItemIndex.home,
-                  onTapped: () => _bottomNavigationBloc.add(
-                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.home),
-                  ),
+                  name: common.BottomNavItem.home,
                 ),
-                BottomNavigationItem(
+                common.BottomNavigationItem(
                   icon: Icons.account_balance,
-                  itemName: 'account',
-                  isSelected: state.currentIndex == BottomNavigationItemIndex.account,
-                  onTapped: () => _bottomNavigationBloc.add(
-                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.account),
-                  ),
+                  name: common.BottomNavItem.account,
                 ),
-                BottomNavigationItem(
+                common.BottomNavigationItem(
                   icon: Icons.show_chart,
-                  itemName: 'transaction',
-                  isSelected: state.currentIndex == BottomNavigationItemIndex.transaction,
-                  onTapped: () => _bottomNavigationBloc.add(
-                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.transaction),
-                  ),
+                  name: common.BottomNavItem.transaction,
                 ),
-                BottomNavigationItem(
+                common.BottomNavigationItem(
                   icon: Icons.settings,
-                  itemName: 'setting',
-                  isSelected: state.currentIndex == BottomNavigationItemIndex.setting,
-                  onTapped: () => _bottomNavigationBloc.add(
-                    BottomNavigationItemTapped(index: BottomNavigationItemIndex.setting),
-                  ),
-                )
+                  name: common.BottomNavItem.setting,
+                ),
               ],
+              onTapped: (index) => _bottomNavigationBloc.add(
+                common.BottomNavigationItemTapped(index: index),
+              ),
             ),
           );
         },
