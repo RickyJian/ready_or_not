@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:ready_or_not/modules/account/account.dart';
 import 'package:ready_or_not/modules/modules.dart';
 
 void main() {
@@ -42,7 +43,7 @@ class AppPage extends StatelessWidget {
               );
             case BottomNavItemIndex.account:
               return Center(
-                child: Text('account'),
+                child: AccountListPage(),
               );
             case BottomNavItemIndex.transaction:
               return Center(
