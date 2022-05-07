@@ -81,10 +81,10 @@ class AccountFormButton extends AccountForm {
   @override
   final String label;
 
-  const AccountFormButton({required this.label}) : super(label: label);
+  final VoidCallback onPressed;
 
-  // TODO: onPressed callback
+  const AccountFormButton({required this.label, required this.onPressed}) : super(label: label);
 
   @override
-  List<Object?> get props => [label];
+  List<Object?> get props => [label, onPressed];
 }
