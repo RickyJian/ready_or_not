@@ -57,12 +57,13 @@ class AccountFormSwitchButton extends AccountForm {
   final String label;
   final bool enabled;
 
-  const AccountFormSwitchButton({required this.label, this.enabled = false}) : super(label: label);
+  final ValueChanged<bool> onChanged;
 
-  // TODO: onChanged callback
+  const AccountFormSwitchButton({required this.label, required this.onChanged, this.enabled = false})
+      : super(label: label);
 
   @override
-  List<Object?> get props => [label, enabled];
+  List<Object?> get props => [label, enabled, onChanged];
 }
 
 class AccountFormButtonGroup extends AccountForm {
