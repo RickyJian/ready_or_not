@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-abstract class AccountForm extends Equatable {
+abstract class AccountFormComponent extends Equatable {
   final String label;
 
-  const AccountForm({required this.label});
+  const AccountFormComponent({required this.label});
 }
 
-class AccountFormText extends AccountForm {
+class AccountFormText extends AccountFormComponent {
   @override
   final String label;
   final int maxLines;
@@ -23,7 +23,7 @@ class AccountFormText extends AccountForm {
   List<Object?> get props => [label, maxLines, maxLength, type, isFocus];
 }
 
-class AccountFormDropdown extends AccountForm {
+class AccountFormDropdown extends AccountFormComponent {
   @override
   final String label;
   final int selectedIndex;
@@ -38,7 +38,7 @@ class AccountFormDropdown extends AccountForm {
   List<Object?> get props => [label, selectedIndex, items, onChanged];
 }
 
-class AccountFormDropdownItem extends AccountForm {
+class AccountFormDropdownItem extends AccountFormComponent {
   @override
   final String label;
   final int index;
@@ -52,7 +52,7 @@ class AccountFormDropdownItem extends AccountForm {
   List<Object?> get props => [label, index];
 }
 
-class AccountFormSwitchButton extends AccountForm {
+class AccountFormSwitchButton extends AccountFormComponent {
   @override
   final String label;
   final bool enabled;
@@ -66,7 +66,7 @@ class AccountFormSwitchButton extends AccountForm {
   List<Object?> get props => [label, enabled, onChanged];
 }
 
-class AccountFormButtonGroup extends AccountForm {
+class AccountFormButtonGroup extends AccountFormComponent {
   @override
   final String label;
   final List<AccountFormButton> buttons;
@@ -77,7 +77,7 @@ class AccountFormButtonGroup extends AccountForm {
   List<Object?> get props => [label, buttons];
 }
 
-class AccountFormButton extends AccountForm {
+class AccountFormButton extends AccountFormComponent {
   @override
   final String label;
 
