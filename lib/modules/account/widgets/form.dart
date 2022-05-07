@@ -69,8 +69,8 @@ class AccountForm extends StatelessWidget {
                               ),
                               child: Text(
                                 item.label,
-                                style: const TextStyle(
-                                  fontSize: Constant.formTextSize,
+                                style: TextStyle(
+                                  fontSize: Constant.formTextSize.sp,
                                 ),
                               ),
                             ),
@@ -80,8 +80,8 @@ class AccountForm extends StatelessWidget {
                             child: Container(
                               alignment: Alignment.bottomLeft,
                               child: TextField(
-                                style: const TextStyle(
-                                  fontSize: Constant.formTextSize,
+                                style: TextStyle(
+                                  fontSize: Constant.formTextSize.sp,
                                 ),
                                 autofocus: item.isFocus,
                                 maxLines: item.maxLines,
@@ -104,8 +104,8 @@ class AccountForm extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 item.label,
-                                style: const TextStyle(
-                                  fontSize: Constant.formTextSize,
+                                style: TextStyle(
+                                  fontSize: Constant.formTextSize.sp,
                                 ),
                               ),
                             ),
@@ -123,8 +123,8 @@ class AccountForm extends StatelessWidget {
                                         value: currency,
                                         child: Text(
                                           currency.toString(),
-                                          style: const TextStyle(
-                                            fontSize: Constant.formTextSize,
+                                          style: TextStyle(
+                                            fontSize: Constant.formTextSize.sp,
                                           ),
                                         ),
                                       ),
@@ -145,8 +145,8 @@ class AccountForm extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 item.label,
-                                style: const TextStyle(
-                                  fontSize: Constant.formTextSize,
+                                style: TextStyle(
+                                  fontSize: Constant.formTextSize.sp,
                                 ),
                               ),
                             ),
@@ -165,20 +165,21 @@ class AccountForm extends StatelessWidget {
                       );
                     } else if (item is AccountFormButtonGroup) {
                       return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: item.buttons
-                              .map(
-                                (button) => TextButton(
-                                  child: Text(
-                                    button.label,
-                                    style: const TextStyle(
-                                      fontSize: Constant.fromButtonTextSize,
-                                    ),
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: item.buttons
+                            .map(
+                              (button) => TextButton(
+                                child: Text(
+                                  button.label,
+                                  style: TextStyle(
+                                    fontSize: Constant.fromButtonTextSize.sp,
                                   ),
-                                  onPressed: () => button.onPressed(),
                                 ),
-                              )
-                              .toList());
+                                onPressed: () => button.onPressed(),
+                              ),
+                            )
+                            .toList(),
+                      );
                     }
                     // TODO: throw ui exception
                     return Container();
