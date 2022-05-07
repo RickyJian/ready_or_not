@@ -1,6 +1,6 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ready_or_not/modules/currency/currency.dart';
+import 'package:ready_or_not/modules/common/common.dart' as common;
 
 class AccountCard extends Equatable {
   final int id;
@@ -10,7 +10,7 @@ class AccountCard extends Equatable {
   final int createTime;
   final String memo;
   final String currencyName;
-  final CurrencyType currencyType;
+  final common.CurrencyType currencyType;
 
   // TODO: add chart
 

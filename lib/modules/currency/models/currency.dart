@@ -1,11 +1,10 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
-
-enum CurrencyType { basic, special }
+import 'package:ready_or_not/modules/common/common.dart' as common;
 
 class Currency extends Equatable {
   final String name;
-  final CurrencyType type;
+  final common.CurrencyType type;
   final Decimal exchangeRate;
 
   Currency({required this.name, required this.type, required this.exchangeRate});
