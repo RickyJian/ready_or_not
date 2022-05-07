@@ -47,7 +47,7 @@ class Message extends Translations {
           accountFormName: '名稱：',
           accountFormPrice: '金額：',
           accountFormType: '類型：',
-          accountFormUnit: '幣別：',
+          accountFormUnit: '單位：',
           accountFormEnabled: '啟用：',
           accountFormMemo: '備註：',
           accountFormButtonGroup: '按鈕群組',
