@@ -29,18 +29,19 @@ class AccountFormDropdown extends AccountForm {
   final int selectedIndex;
   final List<AccountFormDropdownItem> items;
 
-  final ValueChanged onChanged;
+  final ValueChanged<int> onChanged;
 
   const AccountFormDropdown({required this.label, required this.items, required this.onChanged, this.selectedIndex = 0})
       : super(label: label);
 
   @override
-  List<Object?> get props => [label, items];
+  List<Object?> get props => [label, selectedIndex, items, onChanged];
 }
 
 class AccountFormDropdownItem extends AccountForm {
-  final int index;
+  @override
   final String label;
+  final int index;
 
   const AccountFormDropdownItem({required this.index, required this.label}) : super(label: label);
 
@@ -48,7 +49,7 @@ class AccountFormDropdownItem extends AccountForm {
   String toString() => label;
 
   @override
-  List<Object?> get props => [index, label];
+  List<Object?> get props => [label, index];
 }
 
 class AccountFormSwitchButton extends AccountForm {
