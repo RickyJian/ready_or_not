@@ -13,20 +13,20 @@ class Message extends Translations {
   static const chineseLocale = Locale('zh', 'TW');
 
   // currency
-  static const String currencyTypeNormal = "ACCOUNT_FORM_UNIT_NORMAL";
-  static const String currencyTypeSpecial = "ACCOUNT_FORM_UNIT_SPECIAL";
+  static const String currencyTypeNormal = 'ACCOUNT_FORM_UNIT_NORMAL';
+  static const String currencyTypeSpecial = 'ACCOUNT_FORM_UNIT_SPECIAL';
 
   // account
   // form
-  static const String accountFormName = "ACCOUNT_FORM_NAME";
-  static const String accountFormPrice = "ACCOUNT_FORM_PRICE";
-  static const String accountFormType = "ACCOUNT_FORM_TYPE";
-  static const String accountFormUnit = "ACCOUNT_FORM_UNIT";
-  static const String accountFormEnabled = "ACCOUNT_FORM_ENABLED";
-  static const String accountFormMemo = "ACCOUNT_FORM_MEMO";
-  static const String accountFormButtonGroup = "ACCOUNT_FORM_BUTTON_GROUP";
-  static const String accountFormButtonClose = "ACCOUNT_FORM_BUTTON_CLOSE";
-  static const String accountFormButtonSave = "ACCOUNT_FORM_BUTTON_SAVE";
+  static const String accountFormName = 'ACCOUNT_FORM_NAME';
+  static const String accountFormPrice = 'ACCOUNT_FORM_PRICE';
+  static const String accountFormType = 'ACCOUNT_FORM_TYPE';
+  static const String accountFormUnit = 'ACCOUNT_FORM_UNIT';
+  static const String accountFormEnabled = 'ACCOUNT_FORM_ENABLED';
+  static const String accountFormMemo = 'ACCOUNT_FORM_MEMO';
+  static const String accountFormButtonGroup = 'ACCOUNT_FORM_BUTTON_GROUP';
+  static const String accountFormButtonClose = 'ACCOUNT_FORM_BUTTON_CLOSE';
+  static const String accountFormButtonSave = 'ACCOUNT_FORM_BUTTON_SAVE';
 
   @override
   Map<String, Map<String, String>> get keys => {
