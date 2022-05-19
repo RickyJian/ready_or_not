@@ -90,6 +90,7 @@ class AccountForm extends StatelessWidget {
                                   isDense: true,
                                 ),
                                 keyboardType: item.type,
+                                onChanged: item.onChanged,
                               ),
                             ),
                           ),

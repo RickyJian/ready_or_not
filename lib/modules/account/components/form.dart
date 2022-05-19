@@ -15,12 +15,19 @@ class AccountFormText extends AccountFormComponent {
   final TextInputType type;
   final bool isFocus;
 
+  final ValueChanged<String> onChanged;
+
   const AccountFormText(
-      {required this.label, required this.maxLines, required this.maxLength, required this.type, this.isFocus = false})
+      {required this.label,
+      required this.maxLines,
+      required this.maxLength,
+      required this.type,
+      required this.onChanged,
+      this.isFocus = false})
       : super(label: label);
 
   @override
-  List<Object?> get props => [label, maxLines, maxLength, type, isFocus];
+  List<Object?> get props => [label, maxLines, maxLength, type, isFocus, onChanged];
 }
 
 class AccountFormDropdown extends AccountFormComponent {
