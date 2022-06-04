@@ -23,6 +23,7 @@ class Themes {
 
   /// light label and text
   static const lightTextColor = lightPrimaryColor;
+  static final lightHintTextColor = lightPrimaryColor.withOpacity(0.6);
   static const lightTextSecondaryColor = Color.fromRGBO(195, 796, 149, 1);
   static const lightTextBorderColor = lightPrimaryColor;
   static const lightTextFocusedBorderColor = Color.fromARGB(181, 156, 124, 1);
@@ -57,14 +58,18 @@ class Themes {
       bodyText1: textStyle,
       bodyText2: textStyle,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
-      enabledBorder: UnderlineInputBorder(
+    inputDecorationTheme: InputDecorationTheme(
+      enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: lightTextBorderColor,
         ),
       ),
+      hintStyle: TextStyle(
+        color: lightHintTextColor,
+        fontFamily: fontFamily,
+      ),
       focusColor: Colors.black,
-      focusedBorder: UnderlineInputBorder(
+      focusedBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: lightTextFocusedBorderColor,
           width: 2,
