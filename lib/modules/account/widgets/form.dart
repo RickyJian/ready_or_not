@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ready_or_not/modules/account/components/components.dart';
+import 'package:ready_or_not/modules/account/controller.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
 import 'package:sizer/sizer.dart';
 
 import 'constant.dart';
 
 class AccountForm extends StatelessWidget {
+  final AccountController accountController;
   final List<AccountFormComponent> items;
 
-  const AccountForm({required this.items});
+  const AccountForm({required this.accountController, required this.items});
 
   @override
   Widget build(context) {
@@ -27,7 +29,7 @@ class AccountForm extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.only(
-              top: Constant.formAvatarRadius,
+              top: Constant.formTopPadding,
               left: Constant.formPadding,
               right: Constant.formPadding,
               bottom: Constant.formPadding,
@@ -79,18 +81,20 @@ class AccountForm extends StatelessWidget {
                             flex: 2,
                             child: Container(
                               alignment: Alignment.bottomLeft,
-                              child: TextField(
+                              child: TextFormField(
                                 style: TextStyle(
                                   fontSize: Constant.formTextSize.sp,
                                 ),
+                                controller: item.controller,
                                 autofocus: item.isFocus,
                                 maxLines: item.maxLines,
                                 maxLength: item.maxLength,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   isDense: true,
+                                  hintText: item.hintText,
+                                  errorText: item.errorMessage?.isEmpty ?? false ? null : item.errorMessage,
                                 ),
                                 keyboardType: item.type,
-                                onChanged: item.onChanged,
                               ),
                             ),
                           ),
@@ -116,6 +120,12 @@ class AccountForm extends StatelessWidget {
                             child: Container(
                               alignment: Alignment.bottomLeft,
                               child: DropdownButton<AccountFormDropdownItem>(
+                                iconEnabledColor: common.Themes.lightIconColor,
+                                underline: Container(
+                                  height: 1,
+                                  // TODO: color base on context
+                                  color: common.Themes.lightIconColor,
+                                ),
                                 isExpanded: true,
                                 value: item.items[item.selectedIndex],
                                 items: item.items
@@ -173,6 +183,7 @@ class AccountForm extends StatelessWidget {
                                 child: Text(
                                   button.label,
                                   style: TextStyle(
+                                    fontWeight: FontWeight.w600,
                                     fontSize: Constant.fromButtonTextSize.sp,
                                   ),
                                 ),
@@ -193,11 +204,14 @@ class AccountForm extends StatelessWidget {
             left: Constant.formPadding,
             right: Constant.formPadding,
             child: CircleAvatar(
-              backgroundColor: Colors.transparent,
+              // TODO: color base on context
+              backgroundColor: common.Themes.lightBackgroundSecondaryColor,
               radius: Constant.formAvatarRadius,
               child: FaIcon(
                 FontAwesomeIcons.penToSquare,
                 size: Constant.formIconSize,
+                // TODO: color base on context
+                color: common.Themes.lightTextColor,
               ),
             ),
           ),

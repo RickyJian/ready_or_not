@@ -10,29 +10,34 @@ abstract class AccountFormComponent extends Equatable {
 class AccountFormText extends AccountFormComponent {
   @override
   final String label;
+
+  final TextEditingController controller;
   final int maxLines;
   final int maxLength;
   final TextInputType type;
   final bool isFocus;
-
-  final ValueChanged<String> onChanged;
+  final String hintText;
+  final String? errorMessage;
 
   const AccountFormText(
       {required this.label,
       required this.maxLines,
       required this.maxLength,
       required this.type,
-      required this.onChanged,
-      this.isFocus = false})
+      required this.controller,
+      this.isFocus = false,
+      this.hintText = '',
+      this.errorMessage})
       : super(label: label);
 
   @override
-  List<Object?> get props => [label, maxLines, maxLength, type, isFocus, onChanged];
+  List<Object?> get props => [label, controller];
 }
 
 class AccountFormDropdown extends AccountFormComponent {
   @override
   final String label;
+
   final int selectedIndex;
   final List<AccountFormDropdownItem> items;
 
@@ -42,12 +47,13 @@ class AccountFormDropdown extends AccountFormComponent {
       : super(label: label);
 
   @override
-  List<Object?> get props => [label, selectedIndex, items, onChanged];
+  List<Object?> get props => [label, items];
 }
 
 class AccountFormDropdownItem extends AccountFormComponent {
   @override
   final String label;
+
   final int index;
 
   const AccountFormDropdownItem({required this.index, required this.label}) : super(label: label);
@@ -62,6 +68,7 @@ class AccountFormDropdownItem extends AccountFormComponent {
 class AccountFormSwitchButton extends AccountFormComponent {
   @override
   final String label;
+
   final bool enabled;
 
   final ValueChanged<bool> onChanged;
