@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ready_or_not/modules/common/i18n/Message.dart';
+import 'package:ready_or_not/modules/common/i18n/message.dart';
 
 /// Enum stores all enum
 
