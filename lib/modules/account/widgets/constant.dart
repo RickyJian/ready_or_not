@@ -2,6 +2,11 @@ class Constant {
   Constant._();
 
   /// info constant
+  static const double infoTextSize = 15;
+  static const double infoMoneyTextSize = 17;
+  static const double infoPadding = 1.5;
+  static const double infoDividerWidth = 1;
+  static const double infoDividerHeight = 10;
 
   /// form constant
   static const double formShifted = 20;

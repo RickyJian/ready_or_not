@@ -17,6 +17,11 @@ class Message extends Translations {
   static const String currencyTypeSpecial = 'ACCOUNT_FORM_UNIT_SPECIAL';
 
   /// account
+  /// list
+  static const String accountListInfoAssets = 'ACCOUNT_LIST_INFO_ASSETS';
+  static const String accountListInfoLiabilities = 'ACCOUNT_LIST_INFO_LIABILITIES';
+  static const String accountListInfoNetAssets = 'ACCOUNT_LIST_INFO_NET_ASSETS';
+
   /// form
   static const String accountFormName = 'ACCOUNT_FORM_NAME';
   static const String accountFormNameHintText = 'ACCOUNT_FORM_NAME_HINT_TEXT';
@@ -41,6 +46,9 @@ class Message extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          accountListInfoAssets: 'Assets',
+          accountListInfoLiabilities: 'Liabilities',
+          accountListInfoNetAssets: 'Net Assets',
           accountFormName: 'Name:',
           accountFormNameHintText: 'my account',
           accountFormNameEmptyText: 'account name cannot be empty',
@@ -61,6 +69,9 @@ class Message extends Translations {
           errAccountFormPriceIsInvalid: 'account price must be number',
         },
         'zh_TW': {
+          accountListInfoAssets: '資產',
+          accountListInfoLiabilities: '負債',
+          accountListInfoNetAssets: '淨資產',
           accountFormName: '名稱：',
           accountFormNameHintText: '我的帳戶',
           accountFormNameEmptyText: '帳戶名稱不可為空',

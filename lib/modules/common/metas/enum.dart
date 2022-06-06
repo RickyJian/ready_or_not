@@ -25,3 +25,19 @@ extension CurrencyTypeExtension on CurrencyType {
     }
   }
 }
+
+/// Account
+enum AccountInfoType { assets, liabilities, netAssets }
+
+extension ToString on AccountInfoType {
+  String get string {
+    switch (this) {
+      case AccountInfoType.assets:
+        return Message.accountListInfoAssets.tr;
+      case AccountInfoType.liabilities:
+        return Message.accountListInfoLiabilities.tr;
+      case AccountInfoType.netAssets:
+        return Message.accountListInfoNetAssets.tr;
+    }
+  }
+}

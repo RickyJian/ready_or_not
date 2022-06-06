@@ -1,66 +1,64 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:ready_or_not/modules/account/components/components.dart';
+import 'package:ready_or_not/modules/common/common.dart' as common;
 import 'package:sizer/sizer.dart';
 
-import '../components/components.dart' as cpn;
+import 'constant.dart';
 
 class AccountInfo extends StatelessWidget {
-  final List<cpn.AccountInfo> infos;
+  final List<AccountInfoComponent> infos;
 
-  AccountInfo({required this.infos});
+  const AccountInfo({required this.infos});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return Row(
-      children: infos.asMap().entries.map((entry) => _infoItem(entry.value, entry.key != (infos.length - 1))).toList(),
-    );
-  }
-
-  Widget _infoItem(cpn.AccountInfo info, [bool partition = false]) {
-    return Expanded(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    info.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 15.sp,
+      children: infos
+          .asMap()
+          .entries
+          .map((entry) {
+            var info = entry.value;
+            return [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      info.type.string,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: Constant.infoTextSize.sp,
+                      ),
                     ),
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.only(top: 1.5.h, bottom: 1.5),
-                  child: Text(
-                    info.amount.toDouble().toString(),
-                    style: TextStyle(
-                      // TODO: theme
-                      color: Colors.green,
-                      fontSize: 17.sp,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(vertical: Constant.infoPadding.h),
+                      child: Text(
+                        info.amount.toDouble().abs().toString(),
+                        style: TextStyle(
+                          // TODO: dark mode
+                          color: info.amount.isNegative
+                              ? common.Themes.lightNegativeColor
+                              : common.Themes.lightPositiveColor,
+                          fontSize: Constant.infoMoneyTextSize.sp,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          partition ? _partition() : Center(),
-        ],
-      ),
-    );
-  }
-
-  Widget _partition() {
-    return Container(
-      width: 1,
-      height: 10.h,
-      color: Colors.grey.withOpacity(0.8),
+              ),
+              entry.key != infos.length - 1
+                  ? Container(
+                      width: Constant.infoDividerWidth,
+                      height: Constant.infoDividerHeight.h,
+                      color: common.Themes.lightPrimaryColor.withOpacity(0.6),
+                    )
+                  : Container(),
+            ];
+          })
+          .map((widgets) => Expanded(child: Row(children: widgets)))
+          .toList(),
     );
   }
 }

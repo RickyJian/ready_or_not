@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 /// Theme store app themes
-///  * light: https://www.color-hex.com/color-palette/14231
-///           https://paletton.com/#uid=30T0u0k3evf05Wz1bHs67qLa2mH
+///   * light:
+///     primary:
+///     primary font color: https://www.colorhexa.com/b59c7c
+///     positive color: https://www.colorhexa.com/20d41c
+///     negative color: https://www.colorhexa.com/ff1a2e
+///     secondary background:
+///     primary background: https://www.colorhexa.com/fbf9ea
+///     pallet: https://paletton.com/#uid=30T0u0k3evf05Wz1bHs67qLa2mH
 // TODO: add dark theme
 class Themes {
   Themes._();
@@ -13,7 +19,6 @@ class Themes {
 
   /// common constant
   static const String fontFamily = 'openhuninn';
-  static const double textSize = 14;
 
   /// light theme
   static const lightPrimaryColor = Color.fromRGBO(181, 156, 124, 1);
@@ -23,6 +28,8 @@ class Themes {
 
   /// light label and text
   static const lightTextColor = lightPrimaryColor;
+  static const lightPositiveColor = Color.fromRGBO(48, 203, 139, 1);
+  static const lightNegativeColor = Color.fromRGBO(255, 26, 46, 1);
   static final lightHintTextColor = lightPrimaryColor.withOpacity(0.6);
   static const lightTextSecondaryColor = Color.fromRGBO(195, 796, 149, 1);
   static const lightTextBorderColor = lightPrimaryColor;

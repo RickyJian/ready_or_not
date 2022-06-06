@@ -48,7 +48,7 @@ class AccountController extends GetxController {
   count() {
     total.value = 100;
     assets.value = Decimal.parse("100");
-    liability.value = Decimal.parse("20");
+    liability.value = Decimal.parse("-20");
     netAssets.value = assets.value - liability.value;
   }
 

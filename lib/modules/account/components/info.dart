@@ -1,14 +1,13 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ready_or_not/modules/common/common.dart';
 
-class AccountInfo extends Equatable {
-  final String name;
+class AccountInfoComponent extends Equatable {
+  final AccountInfoType type;
   final Decimal amount;
 
-  AccountInfo({required this.name, required this.amount});
-
-  AccountInfo.init({required this.name}) : amount = Decimal.zero;
+  const AccountInfoComponent({required this.type, required this.amount});
 
   @override
-  List<Object> get props => [name, amount];
+  List<Object> get props => [type, amount];
 }
