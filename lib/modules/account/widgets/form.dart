@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ready_or_not/modules/account/components/components.dart';
-import 'package:ready_or_not/modules/account/controller.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
 import 'package:sizer/sizer.dart';
 
 import 'constant.dart';
 
 class AccountForm extends StatelessWidget {
-  final AccountController accountController;
   final List<AccountFormComponent> items;
 
-  const AccountForm({required this.accountController, required this.items});
+  const AccountForm({required this.items});
 
   @override
   Widget build(context) {
