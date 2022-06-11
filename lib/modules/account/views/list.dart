@@ -1,43 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
+import 'package:ready_or_not/modules/account/components/components.dart';
+import 'package:ready_or_not/modules/account/controller.dart';
+import 'package:ready_or_not/modules/account/widgets/widgets.dart' as wdg;
+import 'package:ready_or_not/modules/common/common.dart' as common;
 import 'package:sizer/sizer.dart';
 
-import '../components/components.dart' as cpn;
-import '../controller.dart';
-import '../widgets/widgets.dart' as wdg;
+import 'constant.dart';
 
 class AccountListPage extends StatelessWidget {
-  final AccountController _accountController = Get.put(AccountController());
+  final AccountController accountController;
+
+  const AccountListPage({required this.accountController});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return Sizer(
-      builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
+      builder: (context, orientation, deviceType) {
         return NestedScrollView(
-          controller: _accountController.scrollController,
+          controller: accountController.scrollController,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return <Widget>[
+            return [
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Container(
-                      color: Color(0xFFF6F6F6),
-                      height: 15.h,
+                    SizedBox(
+                      height: Constant.accountInfoHeight.h,
                       child: GetX<AccountController>(
-                        init: _accountController,
+                        init: accountController,
                         builder: (account) => wdg.AccountInfo(
-                          infos: <cpn.AccountInfo>[
-                            cpn.AccountInfo(
-                              name: cpn.accountInfoType.assets.string(),
+                          infos: [
+                            AccountInfoComponent(
+                              type: common.AccountInfoType.assets,
                               amount: account.assets.value,
                             ),
-                            cpn.AccountInfo(
-                              name: cpn.accountInfoType.liabilities.string(),
-                              amount: account.liability.value,
+                            AccountInfoComponent(
+                              type: common.AccountInfoType.liabilities,
+                              amount: account.liabilities.value,
                             ),
-                            cpn.AccountInfo(
-                              name: cpn.accountInfoType.netAssets.string(),
+                            AccountInfoComponent(
+                              type: common.AccountInfoType.netAssets,
                               amount: account.netAssets.value,
                             ),
                           ],
@@ -50,26 +52,32 @@ class AccountListPage extends StatelessWidget {
             ];
           },
           body: Container(
-            height: 85.h,
-            width: 100.w,
+            height: Constant.accountListHeight.h,
+            width: Constant.accountListWidth.w,
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: <BoxShadow>[
+              boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
-                  offset: Offset(0, -2),
-                  blurRadius: 8.0,
+                  offset: const Offset(0, -2),
+                  blurRadius: Constant.accountListBorderBlurRadius,
                 ),
               ],
             ),
             child: CustomScrollView(
               slivers: [
                 GetX<AccountController>(
-                  init: _accountController,
-                  builder: (account) => wdg.AccountCardInfo(total: account.total.value),
+                  init: accountController,
+                  builder: (account) => wdg.AccountCardInfo(
+                    info: AccountCardInfoComponent(
+                      total: account.accountCardListTotal.value,
+                      enabled: account.accountCardListEnabled.value,
+                      onChanged: (enabled) => account.filterCards(enabled),
+                    ),
+                  ),
                 ),
                 GetX<AccountController>(
-                  init: _accountController,
+                  init: accountController,
                   builder: (account) => SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => wdg.AccountCard(
