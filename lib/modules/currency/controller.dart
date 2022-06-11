@@ -1,7 +1,7 @@
 import 'package:decimal/decimal.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
 
-import 'models/models.dart';
+import 'models/currency.dart';
 
 class CurrencyController {
   List<Currency> listCurrencyDropdownItems({required common.CurrencyType type, bool onlyEnabled = false}) {

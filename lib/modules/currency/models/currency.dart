@@ -7,8 +7,8 @@ class Currency extends Equatable {
   final common.CurrencyType type;
   final Decimal exchangeRate;
 
-  Currency({required this.name, required this.type, required this.exchangeRate});
+  const Currency({required this.name, required this.type, required this.exchangeRate});
 
   @override
-  List<Object> get props => [name, type, exchangeRate];
+  List<Object> get props => [name, type];
 }
