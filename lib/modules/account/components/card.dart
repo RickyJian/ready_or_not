@@ -1,29 +1,42 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
 
-class AccountCard extends Equatable {
+class AccountCardInfoComponent extends Equatable {
+  final int total;
+  final bool enabled;
+
+  final ValueChanged<bool> onChanged;
+
+  const AccountCardInfoComponent({required this.total, required this.enabled, required this.onChanged});
+
+  @override
+  List<Object> get props => [total, enabled];
+}
+
+class AccountCardComponent extends Equatable {
   final int id;
   final String name;
   final Decimal amount;
+  final common.CurrencyType type;
+  final String unit;
   final bool enabled;
   final int createTime;
   final String memo;
-  final String currencyName;
-  final common.CurrencyType currencyType;
 
   // TODO: add chart
 
-  AccountCard(
+  const AccountCardComponent(
       {required this.id,
       required this.name,
       required this.amount,
-      required this.currencyName,
-      required this.currencyType,
-      this.enabled = false,
-      this.createTime = 0,
+      required this.type,
+      required this.unit,
+      required this.enabled,
+      required this.createTime,
       this.memo = ''});
 
   @override
-  List<Object> get props => [name, amount, enabled, createTime, memo, currencyName, currencyType];
+  List<Object> get props => [id];
 }

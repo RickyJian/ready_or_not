@@ -7,12 +7,43 @@ import 'package:ready_or_not/modules/currency/currency.dart';
 import 'components/components.dart';
 
 class AccountController extends GetxController {
+  // TODO: remove test data
+  List<AccountCardComponent> _generateAccounts({int page = 0, int number = 10}) {
+    return List.generate(
+      number,
+      (index) {
+        var id = page * number + index + 1;
+        var amount = Decimal.parse("10") * Decimal.fromInt(id);
+        return AccountCardComponent(
+          id: id,
+          name: 'Account $id',
+          amount: id % 4 == 0 ? -amount : amount,
+          type: common.CurrencyType.normal,
+          unit: 'NTD',
+          enabled: id % 3 == 0 ? false : true,
+          createTime: 0,
+          memo: 'Account $id description',
+        );
+      },
+    );
+  }
 
   @override
   onInit() {
-    /// list page
+    /// list info
     count();
-    listAccounts();
+
+    /// card list
+    accountCardListTotal.value = 50;
+    listAccounts(0, accountCardListEnabled.value);
+    page = 1;
+
+    scrollController.addListener(() {
+      if (page < 5 && scrollController.position.maxScrollExtent == scrollController.position.pixels) {
+        listAccounts(page, accountCardListEnabled.value);
+        page++;
+      }
+    });
 
     /// form widget
     accountFormNameController.addListener(() {
@@ -23,6 +54,7 @@ class AccountController extends GetxController {
         accountFormNameErrorMessage.value = '';
       }
     });
+
     accountFormPriceController.addListener(() {
       var errMsg = validateAccountPrice(accountFormPriceController.value.text);
       if (errMsg != null) {
@@ -31,6 +63,7 @@ class AccountController extends GetxController {
         accountFormPriceErrorMessage.value = '';
       }
     });
+
     super.onInit();
   }
 
@@ -39,58 +72,50 @@ class AccountController extends GetxController {
     scrollController.dispose();
   }
 
-  var total = 0.obs;
+  /// list info
   var assets = Decimal.zero.obs;
-  var liability = Decimal.zero.obs;
+  var liabilities = Decimal.zero.obs;
   var netAssets = Decimal.zero.obs;
 
-  // TODO: query from db
-  count() {
-    total.value = 100;
-    assets.value = Decimal.parse("100");
-    liability.value = Decimal.parse("-20");
-    netAssets.value = assets.value - liability.value;
+  // TODO: count from db
+  count() async {
+    for (var card in _generateAccounts(number: 50)) {
+      if (!card.amount.isNegative) {
+        assets.value += card.amount;
+      } else {
+        liabilities.value += card.amount;
+      }
+      netAssets.value += card.amount;
+    }
   }
 
+  /// list card info
   final ScrollController scrollController = ScrollController();
 
-  var page = 0;
+  var accountCardListTotal = 0.obs;
+  var accountCardListEnabled = false.obs;
   var cards = <AccountCardComponent>[].obs;
+  var page = 0;
 
-  // TODO: query from db
-  listAccounts() {
-    cards.value = _fetchAccounts();
-    page++;
-    scrollController.addListener(() {
-      if (page < 5 && scrollController.position.maxScrollExtent == scrollController.position.pixels) {
-        cards.addAll(_fetchAccounts());
-        page++;
-        update(); //update GetBuilder each time
-      }
-    });
+  filterCards(bool enabled) {
+    accountCardListEnabled.value = enabled;
+    scrollController.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.linear);
+    listAccounts(0, enabled);
+    page = 1;
   }
 
-  List<AccountCardComponent> _fetchAccounts() {
-    return List.generate(
-      10,
-      (index) {
-        var id = page * 10 + index + 1;
-        return AccountCardComponent(
-          id: id,
-          name: 'Account $id',
-          memo: 'Account $id description',
-          amount: Decimal.parse("10") * Decimal.fromInt(id),
-          enabled: true,
-          currencyName: 'NTD',
-          currencyType: common.CurrencyType.normal,
-        );
-      },
-    );
+  // TODO: query from db
+  listAccounts([int page = 0, bool enabled = true]) async {
+    if (page == 0) {
+      cards.clear();
+    }
+    cards.addAll(_generateAccounts(page: page).where((card) => (enabled && card.enabled) || (!enabled)).toList());
   }
 
   /// Account form behavior
   final CurrencyController currencyController = CurrencyController();
 
+  // TODO: query from db
   List<Currency> listCurrencies({required common.CurrencyType type, bool onlyEnabled = false}) {
     if (type == common.CurrencyType.normal) {
       return [

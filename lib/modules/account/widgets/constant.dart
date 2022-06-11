@@ -8,6 +8,21 @@ class Constant {
   static const double infoDividerWidth = 1;
   static const double infoDividerHeight = 10;
 
+  /// card constant
+  static const double cardInfoTextSize = 16;
+  static const double cardPaddingVertical = 2;
+  static const double cardPaddingHorizontal = 3;
+  static const double cardHeight = 40;
+  static const double cardWidth = 85;
+  static const double cardBorderRadius = 15;
+  static const double cardIconSize = 35;
+  static const double cardAccountPrimaryText = 15;
+  static const double cardAccountSecondaryText = 10;
+  static const double cardAccountCenterTopPadding = 1;
+  static const double cardAccountCenterRightPadding = 2;
+  static const double cardAccountRightTopPadding = 1;
+  static const double cardAccountRightRightPadding = 5;
+
   /// form constant
   static const double formShifted = 20;
   static const double formHeight = 55;

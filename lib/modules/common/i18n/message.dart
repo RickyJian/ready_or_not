@@ -17,10 +17,15 @@ class Message extends Translations {
   static const String currencyTypeSpecial = 'ACCOUNT_FORM_UNIT_SPECIAL';
 
   /// account
+
   /// list
   static const String accountListInfoAssets = 'ACCOUNT_LIST_INFO_ASSETS';
   static const String accountListInfoLiabilities = 'ACCOUNT_LIST_INFO_LIABILITIES';
   static const String accountListInfoNetAssets = 'ACCOUNT_LIST_INFO_NET_ASSETS';
+
+  /// card info
+  static const String accountCardInfoTotal = 'ACCOUNT_LIST_TOTAL';
+  static const String accountCardInfoEnabled = 'ACCOUNT_CARD_INFO_ENABLED';
 
   /// form
   static const String accountFormName = 'ACCOUNT_FORM_NAME';
@@ -49,6 +54,8 @@ class Message extends Translations {
           accountListInfoAssets: 'Assets',
           accountListInfoLiabilities: 'Liabilities',
           accountListInfoNetAssets: 'Net Assets',
+          accountCardInfoTotal: 'Total: ',
+          accountCardInfoEnabled: 'Enabled only: ',
           accountFormName: 'Name:',
           accountFormNameHintText: 'my account',
           accountFormNameEmptyText: 'account name cannot be empty',
@@ -72,6 +79,8 @@ class Message extends Translations {
           accountListInfoAssets: '資產',
           accountListInfoLiabilities: '負債',
           accountListInfoNetAssets: '淨資產',
+          accountCardInfoTotal: '總筆數：',
+          accountCardInfoEnabled: '僅啟用：',
           accountFormName: '名稱：',
           accountFormNameHintText: '我的帳戶',
           accountFormNameEmptyText: '帳戶名稱不可為空',

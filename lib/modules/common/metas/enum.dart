@@ -27,9 +27,11 @@ extension CurrencyTypeExtension on CurrencyType {
 }
 
 /// Account
+
+/// AccountInfoType
 enum AccountInfoType { assets, liabilities, netAssets }
 
-extension ToString on AccountInfoType {
+extension AccountInfoTypeExtension on AccountInfoType {
   String get string {
     switch (this) {
       case AccountInfoType.assets:
