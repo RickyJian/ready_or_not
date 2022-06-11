@@ -12,6 +12,9 @@ class Message extends Translations {
   static const englishLocale = Locale('en', 'US');
   static const chineseLocale = Locale('zh', 'TW');
 
+  /// project
+  static const appTitle = 'APP_TITLE';
+
   // currency
   static const String currencyTypeNormal = 'ACCOUNT_FORM_UNIT_NORMAL';
   static const String currencyTypeSpecial = 'ACCOUNT_FORM_UNIT_SPECIAL';
@@ -51,6 +54,7 @@ class Message extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          appTitle: 'Ready Or Not',
           accountListInfoAssets: 'Assets',
           accountListInfoLiabilities: 'Liabilities',
           accountListInfoNetAssets: 'Net Assets',
@@ -76,6 +80,7 @@ class Message extends Translations {
           errAccountFormPriceIsInvalid: 'account price must be number',
         },
         'zh_TW': {
+          appTitle: '弒婚遊戲',
           accountListInfoAssets: '資產',
           accountListInfoLiabilities: '負債',
           accountListInfoNetAssets: '淨資產',
