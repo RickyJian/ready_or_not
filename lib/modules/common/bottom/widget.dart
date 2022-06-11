@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'component.dart';
@@ -23,11 +22,15 @@ class BottomNavBar extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: Icon(item.icon),
+                        child: Icon(
+                          item.icon,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(2.0),
-                        child: Text(item.toString()),
+                        child: Text(
+                          item.toString(),
+                        ),
                       ),
                     ],
                   ),
