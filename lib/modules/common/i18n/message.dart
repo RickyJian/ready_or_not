@@ -15,6 +15,12 @@ class Message extends Translations {
   /// project
   static const appTitle = 'APP_TITLE';
 
+  /// bottom nav item
+  static const String bottomNavItemHome = 'BOTTOM_NAV_ITEM_HOME';
+  static const String bottomNavItemAccount = 'BOTTOM_NAV_ITEM_ACCOUNT';
+  static const String bottomNavItemStatistic = 'BOTTOM_NAV_ITEM_STATISTIC';
+  static const String bottomNavItemSetting = 'BOTTOM_NAV_ITEM_SETTING';
+
   // currency
   static const String currencyTypeNormal = 'ACCOUNT_FORM_UNIT_NORMAL';
   static const String currencyTypeSpecial = 'ACCOUNT_FORM_UNIT_SPECIAL';
@@ -55,6 +61,10 @@ class Message extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           appTitle: 'Ready Or Not',
+          bottomNavItemHome: 'Home',
+          bottomNavItemAccount: 'Account',
+          bottomNavItemStatistic: 'Statistic',
+          bottomNavItemSetting: 'Setting',
           accountListInfoAssets: 'Assets',
           accountListInfoLiabilities: 'Liabilities',
           accountListInfoNetAssets: 'Net Assets',
@@ -81,6 +91,10 @@ class Message extends Translations {
         },
         'zh_TW': {
           appTitle: '弒婚遊戲',
+          bottomNavItemHome: '首頁',
+          bottomNavItemAccount: '帳戶',
+          bottomNavItemStatistic: '交易紀錄',
+          bottomNavItemSetting: '設定',
           accountListInfoAssets: '資產',
           accountListInfoLiabilities: '負債',
           accountListInfoNetAssets: '淨資產',

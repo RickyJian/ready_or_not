@@ -34,7 +34,7 @@ class App extends StatelessWidget {
 class AppPage extends StatelessWidget {
   final BottomController _bottomController = Get.put(BottomController());
   final AccountController _accountController = Get.put(AccountController());
-  late BottomNavItemIndex _currentIndex;
+  late BottomNavItem _currentIndex;
 
   init(context) {
     GlobalUI().context = context;
@@ -53,22 +53,23 @@ class AppPage extends StatelessWidget {
       body: GetX<BottomController>(
         init: _bottomController,
         builder: (item) {
+          // TODO: nested navigator
           _currentIndex = item.index.value;
           switch (item.index.value) {
-            case BottomNavItemIndex.home:
+            case BottomNavItem.home:
               return const Center(
                 child: Text('home'),
               );
-            case BottomNavItemIndex.account:
+            case BottomNavItem.account:
               return Center(
                 child: AccountListPage(accountController: _accountController),
               );
-            case BottomNavItemIndex.transaction:
-              return Center(
+            case BottomNavItem.statistic:
+              return const Center(
                 child: Text('transaction'),
               );
-            case BottomNavItemIndex.setting:
-              return Center(
+            case BottomNavItem.setting:
+              return const Center(
                 child: Text('setting'),
               );
           }
@@ -80,13 +81,13 @@ class AppPage extends StatelessWidget {
           shape: const CircularNotchedRectangle(),
           child: BottomNavBar(
             currentIndex: item.index.value,
-            items: [
-              BottomNavItem(name: "HOME", icon: Icons.home, index: BottomNavItemIndex.home),
-              BottomNavItem(name: "ACCOUNT", icon: Icons.account_balance, index: BottomNavItemIndex.account),
-              BottomNavItem(name: "STATISTIC", icon: Icons.show_chart, index: BottomNavItemIndex.transaction),
-              BottomNavItem(name: "SETTING", icon: Icons.settings, index: BottomNavItemIndex.setting),
+            items: const [
+              BottomNavButton(item: BottomNavItem.home, icon: Icons.home),
+              BottomNavButton(item: BottomNavItem.account, icon: Icons.account_balance),
+              BottomNavButton(item: BottomNavItem.statistic, icon: Icons.show_chart),
+              BottomNavButton(item: BottomNavItem.setting, icon: Icons.settings),
             ],
-            onTapped: (index) => item.changeItem(index),
+            onTapped: (index) => item.changeNavItem(index),
           ),
         ),
       ),
@@ -95,9 +96,9 @@ class AppPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           switch (_currentIndex) {
-            case BottomNavItemIndex.home:
+            case BottomNavItem.home:
               break;
-            case BottomNavItemIndex.account:
+            case BottomNavItem.account:
               Get.generalDialog(
                 pageBuilder: (context, animation, secondaryAnimation) => GetX<AccountController>(
                   init: _accountController,
@@ -192,9 +193,9 @@ class AppPage extends StatelessWidget {
                 ),
               );
               break;
-            case BottomNavItemIndex.transaction:
+            case BottomNavItem.statistic:
               break;
-            case BottomNavItemIndex.setting:
+            case BottomNavItem.setting:
               break;
           }
         },
