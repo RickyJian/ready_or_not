@@ -109,6 +109,7 @@ class AppPage extends StatelessWidget {
                         label: Message.accountFormName.tr,
                         maxLength: 10,
                         maxLines: 1,
+                        isFocus: true,
                         type: TextInputType.text,
                         hintText: Message.accountFormNameHintText.tr,
                         errorMessage: _accountController.accountFormNameErrorMessage.value,
