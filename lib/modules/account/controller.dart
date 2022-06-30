@@ -78,14 +78,19 @@ class AccountController extends GetxController {
   var netAssets = Decimal.zero.obs;
 
   // TODO: count from db
-  count() async {
+  count([reload = common.AccountInfoType.all]) async {
     for (var card in _generateAccounts(number: 50)) {
-      if (!card.amount.isNegative) {
+      if (!card.amount.isNegative &&
+          (reload == common.AccountInfoType.all || reload == common.AccountInfoType.assets)) {
         assets.value += card.amount;
-      } else {
+      }
+      if (card.amount.isNegative &&
+          (reload == common.AccountInfoType.all || reload == common.AccountInfoType.liabilities)) {
         liabilities.value += card.amount;
       }
-      netAssets.value += card.amount;
+      if (reload == common.AccountInfoType.all || reload == common.AccountInfoType.netAssets) {
+        netAssets.value += card.amount;
+      }
     }
   }
 

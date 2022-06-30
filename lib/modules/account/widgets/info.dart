@@ -1,3 +1,4 @@
+import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:ready_or_not/modules/account/components/components.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
@@ -34,15 +35,21 @@ class AccountInfo extends StatelessWidget {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       padding: EdgeInsets.symmetric(vertical: Constant.infoPadding.h),
-                      child: Text(
-                        info.amount.toDouble().abs().toString(),
-                        style: TextStyle(
-                          // TODO: dark mode
-                          color: info.amount.isNegative
-                              ? common.Themes.lightNegativeColor
-                              : common.Themes.lightPositiveColor,
-                          fontSize: Constant.infoMoneyTextSize.sp,
+                      child: GestureDetector(
+                        child: Countup(
+                          begin: 0,
+                          end: info.amount.toDouble().abs(),
+                          duration: const Duration(seconds: 2),
+                          separator: Constant.infoAmountSeparator,
+                          style: TextStyle(
+                            // TODO: dark mode
+                            color: info.amount.isNegative
+                                ? common.Themes.lightNegativeColor
+                                : common.Themes.lightPositiveColor,
+                            fontSize: Constant.infoMoneyTextSize.sp,
+                          ),
                         ),
+                        onTap: info.onTapped,
                       ),
                     ),
                   ],

@@ -33,14 +33,17 @@ class AccountListPage extends StatelessWidget {
                             AccountInfoComponent(
                               type: common.AccountInfoType.assets,
                               amount: account.assets.value,
+                              onTapped: () => account.count(common.AccountInfoType.assets),
                             ),
                             AccountInfoComponent(
                               type: common.AccountInfoType.liabilities,
                               amount: account.liabilities.value,
+                              onTapped: () => account.count(common.AccountInfoType.liabilities),
                             ),
                             AccountInfoComponent(
                               type: common.AccountInfoType.netAssets,
                               amount: account.netAssets.value,
+                              onTapped: () => account.count(common.AccountInfoType.netAssets),
                             ),
                           ],
                         ),

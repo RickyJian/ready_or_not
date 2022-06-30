@@ -65,7 +65,7 @@ extension CurrencyTypeExtension on CurrencyType {
 /// Account
 
 /// AccountInfoType
-enum AccountInfoType { assets, liabilities, netAssets }
+enum AccountInfoType { assets, liabilities, netAssets, all }
 
 extension AccountInfoTypeExtension on AccountInfoType {
   String get string {
@@ -76,6 +76,8 @@ extension AccountInfoTypeExtension on AccountInfoType {
         return Message.accountListInfoLiabilities.tr;
       case AccountInfoType.netAssets:
         return Message.accountListInfoNetAssets.tr;
+      case AccountInfoType.all:
+        return '';
     }
   }
 }

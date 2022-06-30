@@ -7,6 +7,7 @@ class Constant {
   static const double infoPadding = 1.5;
   static const double infoDividerWidth = 1;
   static const double infoDividerHeight = 10;
+  static const String infoAmountSeparator = ',';
 
   /// card constant
   static const double cardInfoTextSize = 16;
