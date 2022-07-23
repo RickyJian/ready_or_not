@@ -14,46 +14,42 @@ class AccountListPage extends StatelessWidget {
   const AccountListPage({required this.accountController});
 
   @override
-  Widget build(context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return NestedScrollView(
+  Widget build(context) => Sizer(
+        builder: (context, orientation, deviceType) => NestedScrollView(
           controller: accountController.scrollController,
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    SizedBox(
-                      height: Constant.accountInfoHeight.h,
-                      child: GetX<AccountController>(
-                        init: accountController,
-                        builder: (account) => wdg.AccountInfo(
-                          infos: [
-                            AccountInfoComponent(
-                              type: common.AccountInfoType.assets,
-                              amount: account.assets.value,
-                              onTapped: () => account.count(common.AccountInfoType.assets),
-                            ),
-                            AccountInfoComponent(
-                              type: common.AccountInfoType.liabilities,
-                              amount: account.liabilities.value,
-                              onTapped: () => account.count(common.AccountInfoType.liabilities),
-                            ),
-                            AccountInfoComponent(
-                              type: common.AccountInfoType.netAssets,
-                              amount: account.netAssets.value,
-                              onTapped: () => account.count(common.AccountInfoType.netAssets),
-                            ),
-                          ],
-                        ),
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  SizedBox(
+                    height: Constant.accountInfoHeight.h,
+                    child: GetX<AccountController>(
+                      init: accountController,
+                      builder: (account) => wdg.AccountInfo(
+                        infos: [
+                          AccountInfoComponent(
+                            type: common.AccountInfoType.assets,
+                            amount: account.assets.value,
+                            onTapped: () => account.count(common.AccountInfoType.assets),
+                          ),
+                          AccountInfoComponent(
+                            type: common.AccountInfoType.liabilities,
+                            amount: account.liabilities.value,
+                            onTapped: () => account.count(common.AccountInfoType.liabilities),
+                          ),
+                          AccountInfoComponent(
+                            type: common.AccountInfoType.netAssets,
+                            amount: account.netAssets.value,
+                            onTapped: () => account.count(common.AccountInfoType.netAssets),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ];
-          },
+            ),
+          ],
           body: Container(
             height: Constant.accountListHeight.h,
             width: Constant.accountListWidth.w,
@@ -83,8 +79,18 @@ class AccountListPage extends StatelessWidget {
                   init: accountController,
                   builder: (account) => SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (context, index) => wdg.AccountCard(
-                        account: account.cards[index],
+                      (context, index) => AnimatedBuilder(
+                        animation: account.formAnimationController,
+                        builder: (context, child) => FadeTransition(
+                          opacity: account.formAnimation,
+                          child: Transform.translate(
+                            offset:
+                                Offset(0, common.GlobalUI().getScreenHeight() * (1.0 - account.formAnimation.value)),
+                            child: wdg.AccountCard(
+                              account: account.cards[index],
+                            ),
+                          ),
+                        ),
                       ),
                       childCount: account.cards.length,
                     ),
@@ -93,8 +99,6 @@ class AccountListPage extends StatelessWidget {
               ],
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
 }

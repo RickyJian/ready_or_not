@@ -6,7 +6,7 @@ import 'package:ready_or_not/modules/currency/currency.dart';
 
 import 'components/components.dart';
 
-class AccountController extends GetxController {
+class AccountController extends GetxController with GetSingleTickerProviderStateMixin {
   // TODO: remove test data
   List<AccountCardComponent> _generateAccounts({int page = 0, int number = 10}) {
     return List.generate(
@@ -27,6 +27,9 @@ class AccountController extends GetxController {
       },
     );
   }
+
+  late final AnimationController formAnimationController;
+  late final Animation<double> formAnimation;
 
   @override
   onInit() {
@@ -64,12 +67,24 @@ class AccountController extends GetxController {
       }
     });
 
+    /// animations
+    /// list cards fade in
+    formAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+    formAnimation = CurvedAnimation(
+      parent: formAnimationController,
+      curve: Curves.easeInOut,
+    );
+    formAnimationController.forward();
     super.onInit();
   }
 
   @override
   onClose() {
     scrollController.dispose();
+    formAnimationController.dispose();
   }
 
   /// list info
