@@ -7,9 +7,10 @@ import 'package:ready_or_not/modules/setting/views/setting.dart';
 import 'package:ready_or_not/modules/statistic/views/statistic.dart';
 
 class BottomNavigator extends StatelessWidget {
+  final AccountController accountController = Get.find();
   final BottomNavItem item;
 
-  const BottomNavigator({required this.item});
+  BottomNavigator({required this.item});
 
   @override
   Widget build(context) => Navigator(
@@ -23,6 +24,9 @@ class BottomNavigator extends StatelessWidget {
                 page: () => HomePage(),
               );
             case AppPath.account:
+              // TODO: add reload function
+              accountController.formAnimationController.reset();
+              accountController.formAnimationController.forward();
               return GetPageRoute(
                 routeName: AppPath.account,
                 page: () => AccountListPage(),
