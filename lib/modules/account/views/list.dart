@@ -9,9 +9,7 @@ import 'package:sizer/sizer.dart';
 import 'constant.dart';
 
 class AccountListPage extends StatelessWidget {
-  final AccountController accountController;
-
-  const AccountListPage({required this.accountController});
+  final AccountController accountController = Get.find();
 
   @override
   Widget build(context) => Sizer(

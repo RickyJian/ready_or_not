@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:ready_or_not/modules/common/i18n/message.dart';
 
+import 'path.dart';
+
 /// Enum stores all enum
 
 /// BottomNavItem defines bottom item
@@ -12,6 +14,19 @@ enum BottomNavItem {
 }
 
 extension BottomItemExtension on BottomNavItem {
+  String get id {
+    switch (this) {
+      case BottomNavItem.home:
+        return AppPath.home;
+      case BottomNavItem.account:
+        return AppPath.account;
+      case BottomNavItem.statistic:
+        return AppPath.statistic;
+      case BottomNavItem.setting:
+        return AppPath.setting;
+    }
+  }
+
   String get string {
     switch (this) {
       case BottomNavItem.home:

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ready_or_not/modules/home/views/home.dart';
+import 'package:ready_or_not/modules/setting/views/setting.dart';
+import 'package:ready_or_not/modules/statistic/views/statistic.dart';
 import 'package:sizer/sizer.dart';
 
 import 'modules/modules.dart';
@@ -12,10 +15,8 @@ void main() {
 
 class App extends StatelessWidget {
   @override
-  Widget build(context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return GetMaterialApp(
+  Widget build(context) => Sizer(
+        builder: (context, orientation, deviceType) => GetMaterialApp(
           title: 'Ready Or Not',
           debugShowCheckedModeBanner: false,
           translations: Message(),
@@ -25,16 +26,19 @@ class App extends StatelessWidget {
           locale: Message.englishLocale,
           fallbackLocale: Message.englishLocale,
           home: AppPage(),
-        );
-      },
-    );
-  }
+          getPages: [
+            GetPage(name: BottomNavItem.home.id, page: () => HomePage()),
+            GetPage(name: BottomNavItem.account.id, page: () => AccountListPage()),
+            GetPage(name: BottomNavItem.statistic.id, page: () => StatisticPage()),
+            GetPage(name: BottomNavItem.setting.id, page: () => SettingPage()),
+          ],
+        ),
+      );
 }
 
 class AppPage extends StatelessWidget {
   final BottomController _bottomController = Get.put(BottomController());
   final AccountController _accountController = Get.put(AccountController());
-  late BottomNavItem _currentIndex;
 
   init(context) {
     GlobalUI().context = context;
@@ -52,28 +56,7 @@ class AppPage extends StatelessWidget {
       ),
       body: GetX<BottomController>(
         init: _bottomController,
-        builder: (item) {
-          // TODO: nested navigator
-          _currentIndex = item.index.value;
-          switch (item.index.value) {
-            case BottomNavItem.home:
-              return const Center(
-                child: Text('home'),
-              );
-            case BottomNavItem.account:
-              return Center(
-                child: AccountListPage(accountController: _accountController),
-              );
-            case BottomNavItem.statistic:
-              return const Center(
-                child: Text('transaction'),
-              );
-            case BottomNavItem.setting:
-              return const Center(
-                child: Text('setting'),
-              );
-          }
-        },
+        builder: (item) => BottomNavigator(item: item.index.value),
       ),
       bottomNavigationBar: GetX<BottomController>(
         init: _bottomController,
@@ -95,7 +78,7 @@ class AppPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          switch (_currentIndex) {
+          switch (_bottomController.index.value) {
             case BottomNavItem.home:
               break;
             case BottomNavItem.account:
