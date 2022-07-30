@@ -54,159 +54,162 @@ class AccountForm extends StatelessWidget {
             ),
             child: FocusScope(
               node: node,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: items.map(
-                    (item) {
-                      if (item is AccountFormText) {
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.only(
-                                  top: Constant.formTextMargin.h,
-                                ),
-                                child: Text(
-                                  item.label,
-                                  style: TextStyle(
-                                    fontSize: Constant.formTextSize.sp,
+              child: ScrollConfiguration(
+                behavior: common.GlowlessScrollBehavior(),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: items.map(
+                      (item) {
+                        if (item is AccountFormText) {
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.only(
+                                    top: Constant.formTextMargin.h,
                                   ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                alignment: Alignment.bottomLeft,
-                                child: TextFormField(
-                                  style: TextStyle(
-                                    fontSize: Constant.formTextSize.sp,
-                                  ),
-                                  controller: item.controller,
-                                  autofocus: item.isFocus,
-                                  maxLines: item.maxLines,
-                                  maxLength: item.maxLength,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    hintText: item.hintText,
-                                    errorText: item.errorMessage?.isEmpty ?? false ? null : item.errorMessage,
-                                  ),
-                                  keyboardType: item.type,
-                                  onEditingComplete: onEditComplete,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      } else if (item is AccountFormDropdown) {
-                        return Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  item.label,
-                                  style: TextStyle(
-                                    fontSize: Constant.formTextSize.sp,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                alignment: Alignment.bottomLeft,
-                                child: DropdownButton<AccountFormDropdownItem>(
-                                  iconEnabledColor: common.Themes.lightIconColor,
-                                  underline: Container(
-                                    height: 1,
-                                    // TODO: dark mode
-                                    //   Get.isDarkMode? common.Themes.darkIconColor: common.Themes.lightIconColor,
-                                    color: common.Themes.lightIconColor,
-                                  ),
-                                  isExpanded: true,
-                                  value: item.items[item.selectedIndex],
-                                  items: item.items
-                                      .map(
-                                        (currency) => DropdownMenuItem(
-                                          value: currency,
-                                          child: Text(
-                                            currency.toString(),
-                                            style: TextStyle(
-                                              fontSize: Constant.formTextSize.sp,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
-                                  onChanged: (value) {
-                                    item.onChanged(value!.index);
-                                  },
-                                  onTap: onEditComplete,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      } else if (item is AccountFormSwitchButton) {
-                        return Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  item.label,
-                                  style: TextStyle(
-                                    fontSize: Constant.formTextSize.sp,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                alignment: Alignment.bottomLeft,
-                                child: Switch(
-                                  value: item.enabled,
-                                  focusNode: FocusNode(skipTraversal: true),
-                                  onChanged: (value) {
-                                    item.onChanged(value);
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      } else if (item is AccountFormButtonGroup) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: item.buttons
-                              .map(
-                                (button) => TextButton(
                                   child: Text(
-                                    button.label,
+                                    item.label,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: Constant.fromButtonTextSize.sp,
+                                      fontSize: Constant.formTextSize.sp,
                                     ),
                                   ),
-                                  focusNode: FocusNode(skipTraversal: true),
-                                  onPressed: () => button.onPressed(),
                                 ),
-                              )
-                              .toList(),
-                        );
-                      }
-                      // TODO: throw ui exception
-                      return Container();
-                    },
-                  ).toList(),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: TextFormField(
+                                    style: TextStyle(
+                                      fontSize: Constant.formTextSize.sp,
+                                    ),
+                                    controller: item.controller,
+                                    autofocus: item.isFocus,
+                                    maxLines: item.maxLines,
+                                    maxLength: item.maxLength,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      hintText: item.hintText,
+                                      errorText: item.errorMessage?.isEmpty ?? false ? null : item.errorMessage,
+                                    ),
+                                    keyboardType: item.type,
+                                    onEditingComplete: onEditComplete,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        } else if (item is AccountFormDropdown) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    item.label,
+                                    style: TextStyle(
+                                      fontSize: Constant.formTextSize.sp,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: DropdownButton<AccountFormDropdownItem>(
+                                    iconEnabledColor: common.Themes.lightIconColor,
+                                    underline: Container(
+                                      height: 1,
+                                      // TODO: dark mode
+                                      //   Get.isDarkMode? common.Themes.darkIconColor: common.Themes.lightIconColor,
+                                      color: common.Themes.lightIconColor,
+                                    ),
+                                    isExpanded: true,
+                                    value: item.items[item.selectedIndex],
+                                    items: item.items
+                                        .map(
+                                          (currency) => DropdownMenuItem(
+                                            value: currency,
+                                            child: Text(
+                                              currency.toString(),
+                                              style: TextStyle(
+                                                fontSize: Constant.formTextSize.sp,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                    onChanged: (value) {
+                                      item.onChanged(value!.index);
+                                    },
+                                    onTap: onEditComplete,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        } else if (item is AccountFormSwitchButton) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    item.label,
+                                    style: TextStyle(
+                                      fontSize: Constant.formTextSize.sp,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Switch(
+                                    value: item.enabled,
+                                    focusNode: FocusNode(skipTraversal: true),
+                                    onChanged: (value) {
+                                      item.onChanged(value);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        } else if (item is AccountFormButtonGroup) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: item.buttons
+                                .map(
+                                  (button) => TextButton(
+                                    child: Text(
+                                      button.label,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: Constant.fromButtonTextSize.sp,
+                                      ),
+                                    ),
+                                    focusNode: FocusNode(skipTraversal: true),
+                                    onPressed: () => button.onPressed(),
+                                  ),
+                                )
+                                .toList(),
+                          );
+                        }
+                        // TODO: throw ui exception
+                        return Container();
+                      },
+                    ).toList(),
+                  ),
                 ),
               ),
             ),
