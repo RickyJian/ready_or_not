@@ -62,6 +62,7 @@ class AccountListPage extends StatelessWidget {
               ],
             ),
             child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
               slivers: [
                 GetX<AccountController>(
                   init: accountController,
