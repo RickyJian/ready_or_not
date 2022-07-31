@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ready_or_not/modules/bottom/components/button.dart';
-import 'package:ready_or_not/modules/common/common.dart';
+import 'package:ready_or_not/modules/common/common.dart' as common;
 
 import 'constant.dart';
 
 class BottomNavBar extends StatelessWidget {
   final List<BottomNavButton> items;
-  final BottomNavItem currentIndex;
-  final ValueChanged<BottomNavItem> onTapped;
+  final common.BottomNavItem currentIndex;
+  final ValueChanged<common.BottomNavItem> onTapped;
 
   const BottomNavBar({required this.items, required this.currentIndex, required this.onTapped});
 
