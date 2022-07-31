@@ -20,7 +20,7 @@ class AccountForm extends StatelessWidget {
       ),
       alignment: Alignment.topCenter,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Constant.formBorderRadius),
+        borderRadius: BorderRadius.circular(common.Constant.cardBorderRadius),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -42,13 +42,13 @@ class AccountForm extends StatelessWidget {
               shape: BoxShape.rectangle,
               color: Colors.white,
               borderRadius: BorderRadius.circular(
-                Constant.formBorderRadius,
+                common.Constant.cardBorderRadius,
               ),
               boxShadow: const [
                 BoxShadow(
-                  color: Colors.black,
+                  color: Colors.black45,
                   offset: Offset(0, 0),
-                  blurRadius: Constant.formBorderBlurRadius,
+                  blurRadius: common.Constant.cardBorderRadius,
                 ),
               ],
             ),
@@ -214,18 +214,31 @@ class AccountForm extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: Constant.formPadding,
             right: Constant.formPadding,
-            child: CircleAvatar(
-              // TODO: color base on context
-              backgroundColor: common.Themes.lightBackgroundSecondaryColor,
-              radius: Constant.formAvatarRadius,
-              child: FaIcon(
-                FontAwesomeIcons.penToSquare,
-                size: Constant.formIconSize,
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black45,
+                    offset: Offset(0, 0),
+                    blurRadius: 2,
+                  ),
+                ],
+              ),
+              child: const CircleAvatar(
                 // TODO: color base on context
-                color: common.Themes.lightTextColor,
+                backgroundColor: common.Themes.lightBackgroundColor,
+                radius: Constant.formAvatarRadius,
+                child: FaIcon(
+                  FontAwesomeIcons.penToSquare,
+                  size: Constant.formIconSize,
+                  // TODO: color base on context
+                  color: common.Themes.lightPrimaryColor,
+                ),
               ),
             ),
           ),
