@@ -52,7 +52,7 @@ class AccountCardInfo extends StatelessWidget {
 
 // TODO: disabled card color
 class AccountCard extends StatelessWidget {
-  final AccountController _accountController = Get.put(AccountController());
+  final AccountController _accountController = Get.find();
   final AccountCardComponent account;
 
   AccountCard({required this.account});
