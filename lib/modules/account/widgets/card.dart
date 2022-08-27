@@ -68,7 +68,7 @@ class AccountCard extends StatelessWidget {
           width: Constant.cardWidth.w,
           child: GestureDetector(
             child: Card(
-              elevation: 5,
+              elevation: common.Constant.cardElevation,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(common.Constant.cardBorderRadius),
               ),

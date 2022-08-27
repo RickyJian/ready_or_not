@@ -14,7 +14,7 @@ class Constant {
   static const double cardPaddingVertical = 2;
   static const double cardPaddingHorizontal = 3;
   static const double cardHeight = 40;
-  static const double cardWidth = 85;
+  static const double cardWidth = 100;
   static const double cardIconSize = 35;
   static const double cardSettingIconSize = 30;
   static const double cardSettingLeft = 3;
