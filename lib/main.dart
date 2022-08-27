@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:ready_or_not/modules/home/views/home.dart';
 import 'package:ready_or_not/modules/setting/views/setting.dart';
 import 'package:ready_or_not/modules/statistic/views/statistic.dart';
 import 'package:sizer/sizer.dart';
@@ -27,7 +26,7 @@ class App extends StatelessWidget {
           fallbackLocale: Message.englishLocale,
           home: AppPage(),
           getPages: [
-            GetPage(name: BottomNavItem.home.id, page: () => HomePage()),
+            GetPage(name: BottomNavItem.home.id, page: () => DashboardPage()),
             GetPage(name: BottomNavItem.account.id, page: () => AccountListPage()),
             GetPage(name: BottomNavItem.statistic.id, page: () => StatisticPage()),
             GetPage(name: BottomNavItem.setting.id, page: () => SettingPage()),

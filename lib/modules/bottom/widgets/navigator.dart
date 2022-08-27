@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ready_or_not/modules/account/account.dart';
 import 'package:ready_or_not/modules/common/common.dart';
-import 'package:ready_or_not/modules/home/views/home.dart';
+import 'package:ready_or_not/modules/modules.dart';
 import 'package:ready_or_not/modules/setting/views/setting.dart';
 import 'package:ready_or_not/modules/statistic/views/statistic.dart';
 
@@ -21,7 +21,7 @@ class BottomNavigator extends StatelessWidget {
             case AppPath.home:
               return GetPageRoute(
                 routeName: AppPath.home,
-                page: () => HomePage(),
+                page: () => DashboardPage(),
               );
             case AppPath.account:
               // TODO: add reload function
