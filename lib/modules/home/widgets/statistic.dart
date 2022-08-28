@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
 import 'package:sizer/sizer.dart';
@@ -22,7 +23,38 @@ class StatisticCard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(common.Constant.cardBorderRadius),
               ),
-              child: Container(),
+              child: PieChart(
+                PieChartData(
+                  sections: [
+                    PieChartSectionData(
+                      color: Colors.yellow,
+                      value: 25,
+                      title: '40%',
+                      radius: 10,
+                      titleStyle:
+                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+                    ),
+                    PieChartSectionData(
+                      color: Colors.green,
+                      value: 25,
+                      title: '40%',
+                      radius: 10,
+                      titleStyle:
+                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+                    ),
+                    PieChartSectionData(
+                      color: Colors.blue,
+                      value: 25,
+                      title: '40%',
+                      radius: 10,
+                      titleStyle:
+                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+                    ),
+                  ],
+                ),
+                swapAnimationDuration: Duration(milliseconds: 150), // Optional
+                swapAnimationCurve: Curves.linear, // Optional
+              ),
             ),
             onTap: () {
               // TODO:
@@ -46,6 +78,9 @@ class TxCard extends StatelessWidget {
             height: Constant.txCardHeight.h,
             width: Constant.txCardWidth.w,
             child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(common.Constant.cardBorderRadius),
+              ),
               elevation: common.Constant.cardElevation,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
