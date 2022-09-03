@@ -1,11 +1,17 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
+import 'package:ready_or_not/modules/home/components/components.dart' as cpn;
 import 'package:sizer/sizer.dart';
 
 import 'constant.dart';
 
-class StatisticCard extends StatelessWidget {
+class Statistic extends StatelessWidget {
+  final String name;
+  final List<cpn.StatisticItem> items;
+
+  const Statistic({required this.name, required this.items});
+
   @override
   Widget build(context) => Padding(
         padding: EdgeInsets.only(
@@ -23,37 +29,94 @@ class StatisticCard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(common.Constant.cardBorderRadius),
               ),
-              child: PieChart(
-                PieChartData(
-                  sections: [
-                    PieChartSectionData(
-                      color: Colors.yellow,
-                      value: 25,
-                      title: '40%',
-                      radius: 10,
-                      titleStyle:
-                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: Constant.statisticItemHorizontalPadding.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              margin: EdgeInsets.only(left: Constant.statisticAccountLeftMargin.w),
+                              child: Text(
+                                name,
+                                textDirection: TextDirection.ltr,
+                                style: TextStyle(
+                                  fontSize: Constant.statisticAccountFontSize.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: items
+                                  .map(
+                                    (item) => GestureDetector(
+                                      onTap: item.onPressed,
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: Constant.statisticItemHorizontalMargin.w,
+                                        ),
+                                        child: item.icon,
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    PieChartSectionData(
-                      color: Colors.green,
-                      value: 25,
-                      title: '40%',
-                      radius: 10,
-                      titleStyle:
-                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: Constant.statisticChartTopMargin.h,
+                        bottom: Constant.statisticChartBottomMargin.h,
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned(
+                            child: Text(
+                              'Some informations',
+                            ),
+                          ),
+                          PieChart(
+                            PieChartData(
+                              startDegreeOffset: 270,
+                              sections: [
+                                PieChartSectionData(
+                                  color: common.Themes.lightPositiveColor,
+                                  value: 60,
+                                  radius: Constant.statisticPieChartRadius.w,
+                                  showTitle: false,
+                                ),
+                                PieChartSectionData(
+                                  color: common.Themes.lightNegativeColor,
+                                  value: 30,
+                                  radius: Constant.statisticPieChartRadius.w,
+                                  showTitle: false,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    PieChartSectionData(
-                      color: Colors.blue,
-                      value: 25,
-                      title: '40%',
-                      radius: 10,
-                      titleStyle:
-                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
-                    ),
-                  ],
-                ),
-                swapAnimationDuration: Duration(milliseconds: 150), // Optional
-                swapAnimationCurve: Curves.linear, // Optional
+                  ),
+                ],
               ),
             ),
             onTap: () {
@@ -66,103 +129,5 @@ class StatisticCard extends StatelessWidget {
             },
           ),
         ),
-      );
-}
-
-class TxCard extends StatelessWidget {
-  @override
-  Widget build(context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(
-            height: Constant.txCardHeight.h,
-            width: Constant.txCardWidth.w,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(common.Constant.cardBorderRadius),
-              ),
-              elevation: common.Constant.cardElevation,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Icon(Icons.directions_bus),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('Traffic'),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: Constant.txCardHeight.h,
-            width: Constant.txCardWidth.w,
-            child: Card(
-              elevation: common.Constant.cardElevation,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Icon(Icons.fastfood),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('Fastfood'),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Container(
-            width: Constant.txDividerWidth,
-            height: Constant.txDividerHeight.h,
-            color: common.Themes.lightPrimaryColor.withOpacity(0.6),
-          ),
-          SizedBox(
-            height: Constant.txCardHeight.h,
-            width: Constant.txCardWidth.w,
-            child: Card(
-              elevation: common.Constant.cardElevation,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Icon(Icons.attach_money),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('Salary'),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: Constant.txCardHeight.h,
-            width: Constant.txCardWidth.w,
-            child: Card(
-              elevation: common.Constant.cardElevation,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(flex: 2, child: Icon(Icons.sell)),
-                  Expanded(
-                    flex: 1,
-                    child: Text('Sell'),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
       );
 }

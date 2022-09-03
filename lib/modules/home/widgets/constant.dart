@@ -7,6 +7,16 @@ class Constant {
   static const double statisticCardPaddingHorizontal = 3;
   static const double statisticCardHeight = 45;
   static const double statisticCardWidth = 100;
+  /// top
+  static const double statisticAccountLeftMargin = 3;
+  static const double statisticAccountFontSize = 14;
+  static const double statisticItemHorizontalPadding = 3;
+  static const double statisticItemHorizontalMargin = 2;
+  /// chart
+  static const double statisticChartTopMargin = 0.5;
+  static const double statisticChartBottomMargin = 1;
+  static const double statisticPieChartRadius = 2;
+
 
   /// tx
   static const double txCardHeight = 10;
