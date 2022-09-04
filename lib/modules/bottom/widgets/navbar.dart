@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ready_or_not/modules/bottom/components/button.dart';
+import 'package:get/get.dart';
+import 'package:ready_or_not/modules/bottom/bottom.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
 
 import 'constant.dart';
 
 class BottomNavBar extends StatelessWidget {
+  final BottomController _bottomController = Get.find();
   final List<BottomNavButton> items;
-  final common.BottomNavItem currentIndex;
-  final ValueChanged<common.BottomNavItem> onTapped;
 
-  const BottomNavBar({required this.items, required this.currentIndex, required this.onTapped});
+  BottomNavBar({required this.items});
 
   @override
   Widget build(context) => BottomAppBar(
@@ -36,7 +36,7 @@ class BottomNavBar extends StatelessWidget {
                     ),
                   ],
                 ),
-                onPressed: () => onTapped(item.item),
+                onPressed: () => _bottomController.changeNavItem(item.item),
               );
             },
           ).toList(),

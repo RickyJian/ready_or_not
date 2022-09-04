@@ -57,20 +57,15 @@ class AppPage extends StatelessWidget {
         init: _bottomController,
         builder: (item) => BottomNavigator(item: item.index.value),
       ),
-      bottomNavigationBar: GetX<BottomController>(
-        init: _bottomController,
-        builder: (item) => BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          child: BottomNavBar(
-            currentIndex: item.index.value,
-            items: const [
-              BottomNavButton(item: BottomNavItem.home, icon: Icons.home),
-              BottomNavButton(item: BottomNavItem.account, icon: Icons.account_balance),
-              BottomNavButton(item: BottomNavItem.statistic, icon: Icons.show_chart),
-              BottomNavButton(item: BottomNavItem.setting, icon: Icons.settings),
-            ],
-            onTapped: (index) => item.changeNavItem(index),
-          ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: BottomNavBar(
+          items: const [
+            BottomNavButton(item: BottomNavItem.home, icon: Icons.home),
+            BottomNavButton(item: BottomNavItem.account, icon: Icons.account_balance),
+            BottomNavButton(item: BottomNavItem.statistic, icon: Icons.show_chart),
+            BottomNavButton(item: BottomNavItem.setting, icon: Icons.settings),
+          ],
         ),
       ),
       // TODO: update floating item when tap bottom item
