@@ -1,7 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ready_or_not/modules/common/common.dart' as common;
 import 'package:ready_or_not/modules/home/components/components.dart' as cpn;
+import 'package:ready_or_not/modules/home/controller.dart';
 import 'package:sizer/sizer.dart';
 
 import 'constant.dart';
@@ -10,7 +12,9 @@ class Statistic extends StatelessWidget {
   final String name;
   final List<cpn.StatisticItem> items;
 
-  const Statistic({required this.name, required this.items});
+  final HomeController _homeController = Get.find();
+
+  Statistic({required this.name, required this.items});
 
   @override
   Widget build(context) => Padding(
@@ -62,12 +66,25 @@ class Statistic extends StatelessWidget {
                               children: items
                                   .map(
                                     (item) => GestureDetector(
-                                      onTap: item.onPressed,
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                          horizontal: Constant.statisticItemHorizontalMargin.w,
+                                      onTap: () => _homeController.changeStatisticItem(item.item),
+                                      child: GetX<HomeController>(
+                                        init: _homeController,
+                                        builder: (current) => Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: Constant.statisticItemHorizontalIconMargin.w,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: current.statisticItem.value == item.item
+                                                ? common.Themes.lightPrimaryColor200
+                                                : Colors.transparent,
+                                            borderRadius: BorderRadius.circular(Constant.statisticItemIconBorderRadius),
+                                          ),
+                                          child: SizedBox(
+                                            height: Constant.statisticItemIconHeight.h,
+                                            width: Constant.statisticItemIconWidth.w,
+                                            child: Icon(item.icon),
+                                          ),
                                         ),
-                                        child: item.icon,
                                       ),
                                     ),
                                   )
@@ -121,7 +138,7 @@ class Statistic extends StatelessWidget {
             ),
             onTap: () {
               // TODO:
-              print('go to detail page');
+              print('show information');
             },
             onLongPress: () {
               // TODO: direct to statistic page and query for accounts

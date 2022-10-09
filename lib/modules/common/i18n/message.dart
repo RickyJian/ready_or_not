@@ -25,6 +25,14 @@ class Message extends Translations {
   static const String currencyTypeNormal = 'ACCOUNT_FORM_UNIT_NORMAL';
   static const String currencyTypeSpecial = 'ACCOUNT_FORM_UNIT_SPECIAL';
 
+  /// home
+
+  static const String homeStatisticDefaultAccount = "HOME_STATISTIC_DEFAULT_ACCOUNT";
+  static const String homeStatisticLineChart = 'HOME_STATISTIC_LINE_CHART';
+  static const String homeStatisticBarChart = 'HOME_STATISTIC_BAR_CHART';
+  static const String homeStatisticPieChart = 'HOME_STATISTIC_PIE_CHART';
+  static const String homeStatisticCalendar = 'HOME_STATISTIC_CALENDAR';
+
   /// account
 
   /// list
@@ -88,6 +96,11 @@ class Message extends Translations {
           errAccountFormNameIsEmpty: 'account name cannot be empty',
           errAccountFormPriceIsEmpty: 'account price cannot be empty',
           errAccountFormPriceIsInvalid: 'account price must be number',
+          homeStatisticDefaultAccount: 'Total',
+          homeStatisticBarChart: 'Bar chart',
+          homeStatisticLineChart: 'Line chart',
+          homeStatisticPieChart: 'Pie chart',
+          homeStatisticCalendar: 'Calendar',
         },
         'zh_TW': {
           appTitle: '弒婚遊戲',
@@ -118,6 +131,11 @@ class Message extends Translations {
           errAccountFormNameIsEmpty: '帳戶名稱不可空白',
           errAccountFormPriceIsEmpty: '金額不可空白',
           errAccountFormPriceIsInvalid: '金額須為數字',
+          homeStatisticDefaultAccount: '全部',
+          homeStatisticBarChart: '折線圖',
+          homeStatisticLineChart: '長條圖',
+          homeStatisticPieChart: '圓餅圖',
+          homeStatisticCalendar: '日曆',
         }
       };
 }

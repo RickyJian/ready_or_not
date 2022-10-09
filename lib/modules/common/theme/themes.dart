@@ -15,6 +15,8 @@ import 'package:sizer/sizer.dart';
 class Themes {
   Themes._();
 
+  // TODO: current theme
+
   /// common private constant
   static const _appBarTextSize = 16;
 
@@ -23,6 +25,7 @@ class Themes {
 
   /// light theme
   static const lightPrimaryColor = Color.fromRGBO(181, 156, 124, 1);
+  static const lightPrimaryColor200 = Color.fromRGBO(181, 156, 124, 0.2);
   static const lightBackgroundColor = Color.fromRGBO(251, 249, 234, 1);
   static const lightBackgroundSecondaryColor = Color.fromRGBO(219, 246, 233, 1);
   static const lightNavBackgroundColor = Colors.white;

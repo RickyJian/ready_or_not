@@ -38,6 +38,7 @@ class App extends StatelessWidget {
 class AppPage extends StatelessWidget {
   final BottomController _bottomController = Get.put(BottomController());
   final AccountController _accountController = Get.put(AccountController());
+  final HomeController _homeController = Get.put(HomeController());
 
   init(context) {
     GlobalUI().context = context;

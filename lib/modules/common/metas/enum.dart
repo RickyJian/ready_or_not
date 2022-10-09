@@ -6,12 +6,7 @@ import 'path.dart';
 /// Enum stores all enum
 
 /// BottomNavItem defines bottom item
-enum BottomNavItem {
-  home,
-  account,
-  statistic,
-  setting,
-}
+enum BottomNavItem { home, account, statistic, setting }
 
 extension BottomItemExtension on BottomNavItem {
   String get id {
@@ -93,6 +88,26 @@ extension AccountInfoTypeExtension on AccountInfoType {
         return Message.accountListInfoNetAssets.tr;
       case AccountInfoType.all:
         return '';
+    }
+  }
+}
+
+/// home
+
+/// StatisticItem
+enum StatisticItem { line, bar, pie, calendar }
+
+extension StatisticItemExtension on StatisticItem {
+  String get string {
+    switch (this) {
+      case StatisticItem.line:
+        return Message.homeStatisticLineChart.tr;
+      case StatisticItem.bar:
+        return Message.homeStatisticBarChart.tr;
+      case StatisticItem.pie:
+        return Message.homeStatisticPieChart.tr;
+      case StatisticItem.calendar:
+        return Message.homeStatisticCalendar.tr;
     }
   }
 }
