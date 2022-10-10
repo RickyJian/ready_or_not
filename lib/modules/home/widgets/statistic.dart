@@ -102,34 +102,20 @@ class Statistic extends StatelessWidget {
                         top: Constant.statisticChartTopMargin.h,
                         bottom: Constant.statisticChartBottomMargin.h,
                       ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Positioned(
-                            child: Text(
-                              'Some informations',
-                            ),
-                          ),
-                          PieChart(
-                            PieChartData(
-                              startDegreeOffset: 270,
-                              sections: [
-                                PieChartSectionData(
-                                  color: common.Themes.lightPositiveColor,
-                                  value: 60,
-                                  radius: Constant.statisticPieChartRadius.w,
-                                  showTitle: false,
-                                ),
-                                PieChartSectionData(
-                                  color: common.Themes.lightNegativeColor,
-                                  value: 30,
-                                  radius: Constant.statisticPieChartRadius.w,
-                                  showTitle: false,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                      child: GetX<HomeController>(
+                        init: _homeController,
+                        builder: (current) {
+                          switch (current.statisticItem.value) {
+                            case common.StatisticItem.line:
+                              return LineChartWidget();
+                            case common.StatisticItem.bar:
+                              return BarChartWidget();
+                            case common.StatisticItem.pie:
+                              return PieChartWidget();
+                            case common.StatisticItem.calendar:
+                              return Container();
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -147,4 +133,119 @@ class Statistic extends StatelessWidget {
           ),
         ),
       );
+}
+
+class LineChartWidget extends StatelessWidget {
+  @override
+  Widget build(context) => LineChart(
+        LineChartData(
+          lineBarsData: [
+            LineChartBarData(spots: [
+              FlSpot(0, 0),
+              FlSpot(1, 1),
+              FlSpot(2, 2),
+              FlSpot(3, 3),
+              FlSpot(4, 4),
+              FlSpot(5, 5),
+              FlSpot(6, 6),
+              FlSpot(7, 7),
+              FlSpot(8, 8),
+              FlSpot(9, 9),
+              FlSpot(10, 10),
+            ]),
+            LineChartBarData(spots: [
+              FlSpot(0, 0),
+              FlSpot(3, 2),
+              FlSpot(4, 2),
+              FlSpot(5, 4),
+              FlSpot(6, 7),
+              FlSpot(10, 10),
+            ]),
+          ],
+        ),
+        // swapAnimationDuration: Duration(milliseconds: 150), // Optional
+        // swapAnimationCurve: Curves.linear, // Optional
+      );
+}
+
+class BarChartWidget extends StatelessWidget {
+  @override
+  Widget build(context) => BarChart(
+        BarChartData(
+          barGroups: [
+            BarChartGroupData(
+              x: 1,
+              barRods: [
+                BarChartRodData(
+                  toY: 5,
+                ),
+              ],
+            ),
+            BarChartGroupData(
+              x: 2,
+              barRods: [
+                BarChartRodData(
+                  toY: 10,
+                ),
+              ],
+            ),
+            BarChartGroupData(
+              x: 3,
+              barRods: [
+                BarChartRodData(
+                  toY: 7,
+                ),
+              ],
+            ),
+            BarChartGroupData(
+              x: 4,
+              barRods: [
+                BarChartRodData(
+                  toY: 3,
+                ),
+              ],
+            ),
+          ],
+        ),
+        // swapAnimationDuration: Duration(milliseconds: 150), // Optional
+        // swapAnimationCurve: Curves.linear, // Optional
+      );
+}
+
+class PieChartWidget extends StatelessWidget {
+  @override
+  Widget build(context) => Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            child: Text(
+              'Some informations',
+            ),
+          ),
+          PieChart(
+            PieChartData(
+              startDegreeOffset: 270,
+              sections: [
+                PieChartSectionData(
+                  color: common.Themes.lightPositiveColor,
+                  value: 60,
+                  radius: Constant.statisticPieChartRadius.w,
+                  showTitle: false,
+                ),
+                PieChartSectionData(
+                  color: common.Themes.lightNegativeColor,
+                  value: 30,
+                  radius: Constant.statisticPieChartRadius.w,
+                  showTitle: false,
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+}
+
+class CalendarWidget extends StatelessWidget {
+  @override
+  Widget build(context) => throw UnimplementedError();
 }
